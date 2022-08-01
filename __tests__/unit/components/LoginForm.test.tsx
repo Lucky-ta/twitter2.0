@@ -10,9 +10,14 @@ describe('Test Login Form component', () => {
 
   it('Login Form must have `email` and `password` inputs', () => {
     const emailInput = screen.getByPlaceholderText('e-mail');
-    const passwordInput = screen.getByPlaceholderText('password');
+    const passwordInput = screen.getByPlaceholderText('senha');
 
     expect(emailInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
+  });
+
+  it('Login Form must have `register` link', () => {
+    const registerLink = screen.getByText(/Inscreva-se/i);
+    expect(registerLink).toBeInTheDocument();
   });
 });
