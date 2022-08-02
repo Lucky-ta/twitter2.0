@@ -5,7 +5,7 @@ import Header from '../../../../src/components/Home/Header';
 
 describe('Test main page Header component', () => {
   beforeEach(() => {
-    render(<Header />);
+    render(<Header title="Main Page" />);
   });
 
   it('Header must have user profile picture', () => {

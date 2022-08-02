@@ -1,9 +1,15 @@
 import React from 'react';
 
-function Header() {
+interface IHeaderProps {
+    title: string;
+}
+
+function Header({ title }: IHeaderProps) {
   return (
     <div>
-      <h1>header</h1>
+      <img src="" alt="profile_picture" />
+      <h1>{ title }</h1>
+      <button type="button">Filtro</button>
     </div>
   );
 }
