@@ -1,10 +1,8 @@
 import React from 'react';
-import twitter from '../../public/icons/twitter.png';
 
 function LoginForm() {
   return (
     <div>
-      <img src={twitter.src} width="40px" alt="twitter logo" />
       <h1>Entrar no Twitter</h1>
       <form>
         <div>
