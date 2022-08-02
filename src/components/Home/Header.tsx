@@ -6,11 +6,11 @@ interface IHeaderProps {
 
 function Header({ title }: IHeaderProps) {
   return (
-    <div>
+    <header>
       <img src="" alt="profile_picture" />
       <h1>{ title }</h1>
       <button type="button">Filtro</button>
-    </div>
+    </header>
   );
 }
 
