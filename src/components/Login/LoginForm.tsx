@@ -1,5 +1,5 @@
-import React from "react";
-import twitter from "../../public/icons/twitter.png";
+import React from 'react';
+import twitter from '../../public/icons/twitter.png';
 
 function LoginForm() {
   return (

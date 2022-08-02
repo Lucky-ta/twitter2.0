@@ -16,6 +16,12 @@ describe('Test Login Form component', () => {
     expect(passwordInput).toBeInTheDocument();
   });
 
+  it('Login Form must have a login button with text `Entrar`', () => {
+    const loginButton = screen.getByRole('button');
+    expect(loginButton).toBeInTheDocument();
+    expect(loginButton).toHaveTextContent(/Entrar/i);
+  });
+
   it('Login Form must have `register` link', () => {
     const registerLink = screen.getByText(/Inscreva-se/i);
     expect(registerLink).toBeInTheDocument();
