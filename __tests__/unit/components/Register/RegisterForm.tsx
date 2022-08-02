@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import RegisterForm from '../../../../src/components/Register/RegisterForm';
+import RegisterForm from '../../../../src/components/SignUp/RegisterForm';
 
 describe('Test Register Form component', () => {
   beforeEach(() => {
