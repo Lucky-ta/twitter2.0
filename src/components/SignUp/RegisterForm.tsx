@@ -1,4 +1,9 @@
+import Router from 'next/router';
 import React from 'react';
+
+const redirectToLoginPage = () => {
+  Router.push('/');
+};
 
 function SignUpForm() {
   return (
@@ -20,7 +25,7 @@ function SignUpForm() {
       </form>
       <div>
         <p>Já tem uma conta?</p>
-        <span>Entrar</span>
+        <button type="button" onClick={redirectToLoginPage}>Entrar</button>
       </div>
     </div>
   );

@@ -1,6 +1,11 @@
+import Router from 'next/router';
 import React from 'react';
 
 function LoginForm() {
+  const redirectToRegisterPage = () => {
+    Router.push('/signUp');
+  };
+
   return (
     <div>
       <h1>Entrar no Twitter</h1>
@@ -18,7 +23,7 @@ function LoginForm() {
       </form>
       <div>
         <p>Não tem uma conta?</p>
-        <span>Inscreva-se</span>
+        <button type="button" onClick={redirectToRegisterPage}>Inscreva-se</button>
       </div>
     </div>
   );

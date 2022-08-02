@@ -17,21 +17,13 @@ describe('Test Login Form component', () => {
   });
 
   it('Login Form must have a login button with text `Entrar`', () => {
-    const loginButton = screen.getByRole('button');
-    expect(loginButton).toBeInTheDocument();
-    expect(loginButton).toHaveTextContent(/Entrar/i);
+    const loginButton = screen.getAllByRole('button');
+    expect(loginButton[0]).toBeInTheDocument();
+    expect(loginButton[0]).toHaveTextContent(/Entrar/i);
   });
 
   it('Login Form must have `register` link', () => {
     const registerLink = screen.getByText(/Inscreva-se/i);
     expect(registerLink).toBeInTheDocument();
-  });
-
-  it('Redirect to register page after `Register button` has been clicked on', () => {
-    const registerLink = screen.getByText(/Inscreva-se/i);
-    expect(registerLink).toBeInTheDocument();
-
-    const nameInput = screen.getByPlaceholderText('Nome');
-    expect(nameInput).toBeInTheDocument();
   });
 });
