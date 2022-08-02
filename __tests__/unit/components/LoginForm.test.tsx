@@ -9,8 +9,8 @@ describe('Test Login Form component', () => {
   });
 
   it('Login Form must have `email` and `password` inputs', () => {
-    const emailInput = screen.getByPlaceholderText('e-mail');
-    const passwordInput = screen.getByPlaceholderText('senha');
+    const emailInput = screen.getByPlaceholderText('E-mail');
+    const passwordInput = screen.getByPlaceholderText('Senha');
 
     expect(emailInput).toBeInTheDocument();
     expect(passwordInput).toBeInTheDocument();
