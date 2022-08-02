@@ -26,4 +26,12 @@ describe('Test Login Form component', () => {
     const registerLink = screen.getByText(/Inscreva-se/i);
     expect(registerLink).toBeInTheDocument();
   });
+
+  it('Redirect to register page after `Register button` has been clicked on', () => {
+    const registerLink = screen.getByText(/Inscreva-se/i);
+    expect(registerLink).toBeInTheDocument();
+
+    const nameInput = screen.getByPlaceholderText('Nome');
+    expect(nameInput).toBeInTheDocument();
+  });
 });

@@ -28,4 +28,12 @@ describe('Test Register Form component', () => {
     const registerLink = screen.getByText(/Entrar/i);
     expect(registerLink).toBeInTheDocument();
   });
+
+  it('Redirect to login page after `Enter button` has been clicked on', () => {
+    const registerLink = screen.getByText(/Entrar/i);
+    expect(registerLink).toBeInTheDocument();
+
+    const nameInput = screen.getByPlaceholderText('Nome');
+    expect(nameInput).not.toBeInTheDocument();
+  });
 });
