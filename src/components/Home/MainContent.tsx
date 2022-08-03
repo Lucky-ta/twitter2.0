@@ -29,6 +29,9 @@ function MainContent() {
           Share Button
         </button>
       </div>
+      <button type="button" aria-label="create-tweet-button">
+        Create Tweet Button
+      </button>
     </main>
   );
 }
