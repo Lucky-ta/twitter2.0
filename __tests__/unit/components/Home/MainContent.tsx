@@ -26,12 +26,16 @@ describe('Test MainContent component', () => {
   });
 
   it('Main content must have a comment tweet button', () => {
-    const commentButton = screen.getByRole('button', { name: /comment-button/i });
+    const commentButton = screen.getByRole('button', {
+      name: /comment-button/i,
+    });
     expect(commentButton).toBeInTheDocument();
   });
 
   it('Main content must have a retweet tweet button', () => {
-    const retweetButton = screen.getByRole('button', { name: /retweet-button/i });
+    const retweetButton = screen.getByRole('button', {
+      name: /retweet-button/i,
+    });
     expect(retweetButton).toBeInTheDocument();
   });
 
@@ -48,5 +52,12 @@ describe('Test MainContent component', () => {
   it('Main content must have a tweet textarea', () => {
     const tweetBox = screen.getByRole('textbox');
     expect(tweetBox).toBeInTheDocument();
+  });
+
+  it('Main content must have a create tweet button', () => {
+    const createTweetButton = screen.getByRole('button', {
+      name: /create-tweet-button/i,
+    });
+    expect(createTweetButton).toBeInTheDocument();
   });
 });
