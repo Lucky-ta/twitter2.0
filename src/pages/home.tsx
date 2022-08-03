@@ -2,7 +2,7 @@ import React from 'react';
 import Footer from '../components/Home/Footer';
 import Header from '../components/Home/Header';
 
-function Main() {
+function Home() {
   return (
     <div>
       <Header title="Página Inicial" />
@@ -11,4 +11,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Home;
