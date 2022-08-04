@@ -1,4 +1,5 @@
 import React from 'react';
+import UserProfilePicture from '../profilePicture';
 
 interface IHeaderProps {
     title: string;
@@ -7,7 +8,7 @@ interface IHeaderProps {
 function Header({ title }: IHeaderProps) {
   return (
     <header>
-      <img src="" alt="profile_picture" />
+      <UserProfilePicture />
       <h1>{ title }</h1>
       <button type="button">Filtro</button>
     </header>
