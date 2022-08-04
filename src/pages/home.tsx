@@ -3,7 +3,7 @@ import Footer from '../components/Home/Footer';
 import Header from '../components/Home/Header';
 import MainContent from '../components/Home/MainContent';
 
-function Home() {
+function Main() {
   return (
     <div>
       <Header title="Página Inicial" />
@@ -13,4 +13,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Main;
