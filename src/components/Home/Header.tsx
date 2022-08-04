@@ -1,5 +1,5 @@
 import React from 'react';
-import UserProfilePicture from '../profilePicture';
+import UserProfilePicture from '../ProfilePicture';
 
 interface IHeaderProps {
     title: string;

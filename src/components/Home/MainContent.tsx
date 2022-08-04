@@ -1,5 +1,5 @@
 import React from 'react';
-import UserProfilePicture from '../profilePicture';
+import UserProfilePicture from '../ProfilePicture';
 
 function MainContent() {
   return (

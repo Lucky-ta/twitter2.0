@@ -1,6 +1,6 @@
 import React from 'react';
-import PreviousPageButton from '../previousPageButton';
-import UserProfilePicture from '../profilePicture';
+import PreviousPageButton from '../PreviousPageButton';
+import UserProfilePicture from '../ProfilePicture';
 
 function TweetCard() {
   return (

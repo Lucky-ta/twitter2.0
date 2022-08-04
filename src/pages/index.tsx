@@ -1,12 +1,12 @@
 import React from 'react';
 import LoginForm from '../components/Login/LoginForm';
-import twitter from '../public/icons/twitter.png';
+import TwitterLogo from '../components/TwitterLogo';
 
 export default function Home() {
   return (
     <div>
       <header>
-        <img src={twitter.src} width="40px" alt="twitter logo" />
+        <TwitterLogo />
       </header>
       <main>
         <LoginForm />
