@@ -22,6 +22,9 @@ function TweetCard() {
         <button type="button" aria-label="add-gif-button">
           Add gif
         </button>
+        <button type="button" aria-label="add-survey-button">
+          Add Survey
+        </button>
       </div>
     </main>
   );
