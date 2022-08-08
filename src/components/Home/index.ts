@@ -21,11 +21,6 @@ export const HeaderTitle = styled.h1`
     padding-left: 1.4em;
 `;
 
-export const UserProfilePicture = styled.img`
-    width: 10%;
-    border-radius: 100em;
-`;
-
 export const HeaderFilterButton = styled.button`
     background: none;
     border: none;
@@ -35,4 +30,37 @@ export const HeaderFilterButton = styled.button`
 
     margin: auto;
     margin-right: 1em;
+`;
+
+export const UserProfilePicture = styled.img`
+    width: 10%;
+    border-radius: 100em;
+`;
+
+export const FooterContainer = styled.footer`
+    background-color: black;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+
+    width: 100vw;
+    padding-top: 1em;
+    padding-bottom: 0.4em;
+
+    justify-content: space-around;
+`;
+
+export const FooterButtons = styled.button`
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.6em;
+`;
+
+export const MainContentContainer = styled.main`
+    padding-top: 4em;
+
+    width: 100vw;
+    height: 100vh;
+    background-color: aqua;
 `;

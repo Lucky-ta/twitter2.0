@@ -1,10 +1,10 @@
 import React from 'react';
 import ProfilePicture from '../../public/icons/blank-profile-picture.png';
-import { UserProfilePicture } from '.';
+import { MainContentContainer, UserProfilePicture } from '.';
 
 function MainContent() {
   return (
-    <main>
+    <MainContentContainer>
       <div>
         <UserProfilePicture src={ProfilePicture.src} />
       </div>
@@ -34,7 +34,7 @@ function MainContent() {
       <button type="button" aria-label="create-tweet-button">
         Create Tweet Button
       </button>
-    </main>
+    </MainContentContainer>
   );
 }
 
