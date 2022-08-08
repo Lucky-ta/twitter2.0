@@ -1,5 +1,14 @@
 import Router from 'next/router';
 import React from 'react';
+import {
+  SignUpComponentButton,
+  SignUpComponentContainer,
+  SignUpComponentForm,
+  SignUpComponentInput,
+  SignUpComponentLink,
+  SignUpComponentLinkContainer,
+  SignUpComponentTitle,
+} from '.';
 
 const redirectToLoginPage = () => {
   Router.push('/');
@@ -7,27 +16,31 @@ const redirectToLoginPage = () => {
 
 function SignUpForm() {
   return (
-    <div>
-      <h1>Entre hoje mesmo para o Twitter</h1>
-      <form>
+    <SignUpComponentContainer>
+      <SignUpComponentTitle>
+        Entre hoje mesmo para o Twitter
+      </SignUpComponentTitle>
+      <SignUpComponentForm>
         <div>
-          <input type="text" placeholder="Nome" />
+          <SignUpComponentInput type="text" placeholder="Nome" />
         </div>
         <div>
-          <input type="email" placeholder="E-mail" />
+          <SignUpComponentInput type="email" placeholder="E-mail" />
         </div>
         <div>
-          <input type="password" placeholder="Senha" />
+          <SignUpComponentInput type="password" placeholder="Senha" />
         </div>
         <div>
-          <button type="button">Registrar</button>
+          <SignUpComponentButton type="button">Registrar</SignUpComponentButton>
         </div>
-      </form>
-      <div>
+      </SignUpComponentForm>
+      <SignUpComponentLinkContainer>
         <p>Já tem uma conta?</p>
-        <button type="button" onClick={redirectToLoginPage}>Entrar</button>
-      </div>
-    </div>
+        <SignUpComponentLink type="button" onClick={redirectToLoginPage}>
+          Entrar
+        </SignUpComponentLink>
+      </SignUpComponentLinkContainer>
+    </SignUpComponentContainer>
   );
 }
 
