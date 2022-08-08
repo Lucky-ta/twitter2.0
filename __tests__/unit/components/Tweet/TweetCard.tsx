@@ -43,4 +43,11 @@ describe('Test Tweet Card component', () => {
     });
     expect(addGifButton).toBeInTheDocument();
   });
+
+  it('Tweet card must have a survey option', () => {
+    const surveyButton = screen.getByRole('button', {
+      name: /add-survey-button/i,
+    });
+    expect(surveyButton).toBeInTheDocument();
+  });
 });
