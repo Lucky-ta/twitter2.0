@@ -1,5 +1,15 @@
 import Router from 'next/router';
 import React from 'react';
+import FormButtonsContainer from '.';
+import {
+  SignUpComponentButton,
+  SignUpComponentContainer,
+  SignUpComponentForm,
+  SignUpComponentInput,
+  SignUpComponentLink,
+  SignUpComponentLinkContainer,
+  SignUpComponentTitle,
+} from '../SignUp';
 
 function LoginForm() {
   const redirectToRegisterPage = () => {
@@ -7,25 +17,29 @@ function LoginForm() {
   };
 
   return (
-    <div>
-      <h1>Entrar no Twitter</h1>
-      <form>
+    <SignUpComponentContainer>
+      <SignUpComponentTitle>Entrar no Twitter</SignUpComponentTitle>
+      <SignUpComponentForm>
         <div>
-          <input type="email" placeholder="E-mail" />
+          <SignUpComponentInput type="email" placeholder="E-mail" />
         </div>
         <div>
-          <input type="password" placeholder="Senha" />
-          <span>Esqueceu sua senha?</span>
+          <SignUpComponentInput type="password" placeholder="Senha" />
         </div>
-        <div>
-          <button type="button">Entrar</button>
-        </div>
-      </form>
-      <div>
+        <FormButtonsContainer>
+          <SignUpComponentButton type="button">Entrar</SignUpComponentButton>
+          <SignUpComponentButton isTransparent>
+            Esqueceu sua senha?
+          </SignUpComponentButton>
+        </FormButtonsContainer>
+      </SignUpComponentForm>
+      <SignUpComponentLinkContainer>
         <p>Não tem uma conta?</p>
-        <button type="button" onClick={redirectToRegisterPage}>Inscreva-se</button>
-      </div>
-    </div>
+        <SignUpComponentLink type="button" onClick={redirectToRegisterPage}>
+          Inscreva-se
+        </SignUpComponentLink>
+      </SignUpComponentLinkContainer>
+    </SignUpComponentContainer>
   );
 }
 

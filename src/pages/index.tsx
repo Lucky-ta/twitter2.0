@@ -1,16 +1,18 @@
 import React from 'react';
 import LoginForm from '../components/Login/LoginForm';
+import { SignUpPageForm, SignUpPageHeader } from '../components/SignUp';
 import TwitterLogo from '../components/TwitterLogo';
+import { GlobalPageContainer } from '../styles/globalContainer';
 
 export default function Home() {
   return (
-    <div>
-      <header>
+    <GlobalPageContainer>
+      <SignUpPageHeader>
         <TwitterLogo />
-      </header>
-      <main>
+      </SignUpPageHeader>
+      <SignUpPageForm>
         <LoginForm />
-      </main>
-    </div>
+      </SignUpPageForm>
+    </GlobalPageContainer>
   );
 }

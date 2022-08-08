@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const SignUpPageHeader = styled.header`
     width: 100vw;
@@ -53,7 +53,11 @@ export const SignUpComponentInput = styled.input`
     padding-left: 1.6em;
 `;
 
-export const SignUpComponentButton = styled.button`
+interface ButtonProps {
+    isTransparent?: boolean;
+}
+
+export const SignUpComponentButton = styled.button<ButtonProps>`
     width: 100%;
     height: 2.8em;
     border: none;
@@ -61,6 +65,12 @@ export const SignUpComponentButton = styled.button`
 
     font-size: 0.9em;
     font-weight: 700;
+
+    ${({ isTransparent }) => isTransparent && css`
+        color: white;
+        border: 1px solid white;
+        background-color: transparent;
+    `}
 `;
 
 export const SignUpComponentLinkContainer = styled.div`

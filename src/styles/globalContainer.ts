@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SignUpContainer = styled.div`
+export const GlobalPageContainer = styled.div`
     background-color: black;
     color: white;
 
