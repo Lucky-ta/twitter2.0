@@ -5,13 +5,13 @@ import { RiQuillPenFill } from 'react-icons/ri';
 import { BsThreeDots } from 'react-icons/bs';
 import { FaRegComment, FaRetweet } from 'react-icons/fa';
 import ProfilePicture from '../../public/icons/blank-profile-picture.png';
-import { MainContentContainer, UserProfilePicture } from '.';
+import { CreateTweetButton, MainContentContainer, UserProfilePicture } from '.';
 
 function MainContent() {
   return (
     <MainContentContainer>
       <div>
-        <UserProfilePicture src={ProfilePicture.src} />
+        <UserProfilePicture profileWidth="3em" src={ProfilePicture.src} />
       </div>
       <div>
         <h2>User Name</h2>
@@ -36,9 +36,9 @@ function MainContent() {
           <FiShare />
         </button>
       </div>
-      <button type="button" aria-label="create-tweet-button">
+      <CreateTweetButton type="button" aria-label="create-tweet-button">
         <RiQuillPenFill />
-      </button>
+      </CreateTweetButton>
     </MainContentContainer>
   );
 }
