@@ -2,14 +2,15 @@ import React from 'react';
 import Footer from '../components/Home/Footer';
 import Header from '../components/Home/Header';
 import MainContent from '../components/Home/MainContent';
+import { GlobalPageContainer } from '../styles/globalContainer';
 
 function Main() {
   return (
-    <div>
+    <GlobalPageContainer>
       <Header title="Página Inicial" />
       <MainContent />
       <Footer />
-    </div>
+    </GlobalPageContainer>
   );
 }
 

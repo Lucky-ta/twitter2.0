@@ -1,11 +1,12 @@
 import React from 'react';
-import UserProfilePicture from '../ProfilePicture';
+import ProfilePicture from '../../public/icons/blank-profile-picture.png';
+import { UserProfilePicture } from '.';
 
 function MainContent() {
   return (
     <main>
       <div>
-        <UserProfilePicture />
+        <UserProfilePicture src={ProfilePicture.src} />
       </div>
       <div>
         <h2>User Name</h2>
