@@ -8,7 +8,6 @@ export const SignUpPageHeader = styled.header`
 
 export const SignUpPageForm = styled.main`
     width: 100vw;
-    height: 100vh;
     margin-top: 8em;
 `;
 
@@ -31,6 +30,14 @@ export const SignUpComponentForm = styled.form`
     gap: 1em;
     margin-top: 2em;
     margin-bottom: 2em;
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:focus {
+        transition: background-color 600000s 0s, color 600000s 0s;
+    }
+    input[data-autocompleted] {
+        background-color: transparent !important;
+    }
 `;
 
 export const SignUpComponentInput = styled.input`
