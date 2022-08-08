@@ -66,10 +66,21 @@ export const SignUpComponentButton = styled.button<ButtonProps>`
     font-size: 0.9em;
     font-weight: 700;
 
+    &:active{
+        color: white;
+        border: 1px solid white;
+        background-color: transparent;
+    }
+
     ${({ isTransparent }) => isTransparent && css`
         color: white;
         border: 1px solid white;
         background-color: transparent;
+
+        &:active{
+        color: black;
+        background-color: white;
+    }
     `}
 `;
 
