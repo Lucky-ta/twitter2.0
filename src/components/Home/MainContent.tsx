@@ -1,4 +1,9 @@
 import React from 'react';
+import { AiOutlineHeart } from 'react-icons/ai';
+import { FiShare } from 'react-icons/fi';
+import { RiQuillPenFill } from 'react-icons/ri';
+import { BsThreeDots } from 'react-icons/bs';
+import { FaRegComment, FaRetweet } from 'react-icons/fa';
 import ProfilePicture from '../../public/icons/blank-profile-picture.png';
 import { MainContentContainer, UserProfilePicture } from '.';
 
@@ -11,7 +16,7 @@ function MainContent() {
       <div>
         <h2>User Name</h2>
         <button type="button" aria-label="dots-option-button">
-          ...
+          <BsThreeDots />
         </button>
       </div>
       <div>
@@ -19,20 +24,20 @@ function MainContent() {
       </div>
       <div>
         <button type="button" aria-label="comment-button">
-          Comment Button
+          <FaRegComment />
         </button>
         <button type="button" aria-label="retweet-button">
-          Retweet Button
+          <FaRetweet />
         </button>
         <button type="button" aria-label="like-button">
-          Like Button
+          <AiOutlineHeart />
         </button>
         <button type="button" aria-label="share-button">
-          Share Button
+          <FiShare />
         </button>
       </div>
       <button type="button" aria-label="create-tweet-button">
-        Create Tweet Button
+        <RiQuillPenFill />
       </button>
     </MainContentContainer>
   );
