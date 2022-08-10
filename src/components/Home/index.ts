@@ -18,6 +18,10 @@ export const MainPageHeader = styled.header`
     backdrop-filter: blur(5px);
 `;
 
+export const HeaderSpacing = styled.div`
+    padding-top: 3.1em;
+`;
+
 export const HeaderTitle = styled.h1`
     padding-left: 1.4em;
 `;
@@ -34,15 +38,16 @@ export const HeaderFilterButton = styled.button`
 `;
 
 interface UserProfilePictureProps {
-    profileWidth?: string;
+    tweetProfilePicture?: boolean;
 }
 
 export const UserProfilePicture = styled.img<UserProfilePictureProps>`
     width: 3.4em;
     border-radius: 100em;
 
-    ${({ profileWidth }) => profileWidth && css`
-        width: 3em
+
+    ${({ tweetProfilePicture }) => tweetProfilePicture && css`
+        width: 2.9em
     `}
 `;
 
@@ -67,11 +72,11 @@ export const FooterButtons = styled.button`
 `;
 
 export const MainContentContainer = styled.main`
-    padding-top: 4em;
-
-    width: 100vw;
-    height: 100vh;
-    background-color: aqua;
+    width: 100%;
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+    border-top: 1px solid grey;
+    border-bottom: 1px solid grey;
 `;
 
 export const CreateTweetButton = styled.button`
@@ -94,4 +99,39 @@ export const CreateTweetButton = styled.button`
     &:hover{
         cursor: pointer;
     }
+`;
+
+export const MainContentHeader = styled.div`
+    display: flex;
+    width: 100%;
+    align-items: center;
+    font-size: 0.8em;
+    gap: 1em;
+    padding-bottom: 1.2em;
+    padding-top: 1.2em;
+`;
+
+export const MainContentFilterButton = styled.button`
+    background: none;
+    border: none;
+    color: grey;
+    font-size: 1.6em;
+
+    margin: auto;
+    margin-right: 0em;
+`;
+
+export const MainContentButtonsContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
+`;
+
+export const MainContentButtons = styled.button`
+    background: none;
+    border: none;
+    color: grey;
+    font-size: 1.2em;
 `;
