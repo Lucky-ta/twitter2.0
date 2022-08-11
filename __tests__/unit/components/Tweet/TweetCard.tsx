@@ -14,7 +14,7 @@ describe('Test Tweet Card component', () => {
   });
 
   it('Tweet card must have a tweet textarea', () => {
-    const tweetTextArea = screen.getByRole('textbox');
+    const tweetTextArea = screen.getByPlaceholderText(/O que está acontencendo?/i);
     expect(tweetTextArea).toBeInTheDocument();
   });
 

@@ -4,6 +4,7 @@ import { FiShare } from 'react-icons/fi';
 import { RiQuillPenFill } from 'react-icons/ri';
 import { BsThreeDots } from 'react-icons/bs';
 import { FaRegComment, FaRetweet } from 'react-icons/fa';
+import { useRouter } from 'next/router';
 import ProfilePicture from '../../public/icons/blank-profile-picture.png';
 import {
   CreateTweetButton,
@@ -16,17 +17,26 @@ import {
 } from '.';
 
 function MainContent() {
+  const router = useRouter();
+  const redirectToTweetPage = () => {
+    router.push('/compose/tweet');
+  };
+
   return (
     <MainContentContainer>
       <MainContentHeader>
-        <UserProfilePicture tweetProfilePicture src={ProfilePicture.src} />
+        <UserProfilePicture
+          alt="main_profile_picture"
+          tweetProfilePicture
+          src={ProfilePicture.src}
+        />
         <h2>User Name</h2>
         <MainContentFilterButton type="button" aria-label="dots-option-button">
           <BsThreeDots />
         </MainContentFilterButton>
       </MainContentHeader>
       <div>
-        <p>
+        <p role="paragraph">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi,
           eum eligendi. Provident in vitae optio odio, maiores placeat
           voluptates non facilis quaerat, harum culpa consequuntur laborum
@@ -47,7 +57,11 @@ function MainContent() {
           <FiShare />
         </MainContentButtons>
       </MainContentButtonsContainer>
-      <CreateTweetButton type="button" aria-label="create-tweet-button">
+      <CreateTweetButton
+        onClick={redirectToTweetPage}
+        type="button"
+        aria-label="create-tweet-button"
+      >
         <RiQuillPenFill />
       </CreateTweetButton>
     </MainContentContainer>

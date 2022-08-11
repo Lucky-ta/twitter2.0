@@ -49,8 +49,8 @@ describe('Test MainContent component', () => {
     expect(shareButton).toBeInTheDocument();
   });
 
-  it('Main content must have a tweet textarea', () => {
-    const tweetBox = screen.getByRole('textbox');
+  it('Main content must have a tweet paragraph', () => {
+    const tweetBox = screen.getByRole('paragraph');
     expect(tweetBox).toBeInTheDocument();
   });
 

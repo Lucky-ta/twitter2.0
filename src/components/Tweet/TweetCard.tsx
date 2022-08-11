@@ -6,6 +6,7 @@ import { ImParagraphLeft } from 'react-icons/im';
 import { TbCalendarTime } from 'react-icons/tb';
 import { FaGlobeAmericas } from 'react-icons/fa';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
+import { useRouter } from 'next/router';
 import { UserProfilePicture } from '../Home';
 import ProfilePicture from '../../public/icons/blank-profile-picture.png';
 import {
@@ -20,13 +21,26 @@ import {
 } from '.';
 
 function TweetCard() {
+  const router = useRouter();
+  const redirectToHomePage = () => {
+    router.push('/home');
+  };
+
   return (
     <TweetPageContainer>
       <LeftArrowButton>
-        <BsArrowLeftShort />
+        <BsArrowLeftShort
+          role="button"
+          aria-label="previous-page-button"
+          onClick={redirectToHomePage}
+        />
       </LeftArrowButton>
       <TweetContainer>
-        <UserProfilePicture tweetProfilePicture src={ProfilePicture.src} />
+        <UserProfilePicture
+          alt="main_profile_picture"
+          tweetProfilePicture
+          src={ProfilePicture.src}
+        />
         <div>
           <TweetTextArea
             placeholder="O que está acontencendo?"
@@ -55,13 +69,13 @@ function TweetCard() {
           <TweetButtons type="button" aria-label="add-survey-button">
             <ImParagraphLeft />
           </TweetButtons>
-          <TweetButtons type="button" aria-label="add-survey-button">
+          <TweetButtons type="button" aria-label="add-emoji-button">
             <BsEmojiSmile />
           </TweetButtons>
-          <TweetButtons type="button" aria-label="add-survey-button">
+          <TweetButtons type="button" aria-label="add-calendar-button">
             <TbCalendarTime />
           </TweetButtons>
-          <TweetButtons disabled type="button" aria-label="add-survey-button">
+          <TweetButtons disabled type="button" aria-label="add-location-button">
             <HiOutlineLocationMarker />
           </TweetButtons>
         </TweetButtonsContainer>
