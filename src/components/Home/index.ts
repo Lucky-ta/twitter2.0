@@ -75,8 +75,9 @@ export const MainContentContainer = styled.main`
     width: 100%;
     padding-left: 0.6em;
     padding-right: 0.6em;
-    border-top: 1px solid grey;
-    border-bottom: 1px solid grey;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-color: rgba(128,128,128, 0.3);
 `;
 
 export const CreateTweetButton = styled.button`
