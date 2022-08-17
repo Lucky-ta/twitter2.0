@@ -7,8 +7,12 @@ export type NewUserShape = {
 }
 
 const signUpUser = async (newUser: NewUserShape) => {
-  const result = await Api.post('/user/create', newUser);
-  return result.data;
+  try {
+    const result = await Api.post('/user/create', newUser);
+    return result.data;
+  } catch (e: any) {
+    return { message: e.message };
+  }
 };
 
 export { signUpUser };

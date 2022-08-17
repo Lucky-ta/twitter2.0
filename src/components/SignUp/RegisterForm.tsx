@@ -9,15 +9,19 @@ import {
   SignUpComponentLinkContainer,
   SignUpComponentTitle,
 } from '.';
-import { NewUserShape } from '../../services/userApi';
+import { NewUserShape, signUpUser } from '../../services/userApi';
 
 const redirectToLoginPage = () => {
   Router.push('/');
 };
 
 function SignUpForm() {
+  const [errorMessage, setErrorMessage] = useState('');
+
   const [newUser, setNewUser] = useState<NewUserShape>({
-    name: '', email: '', password: '',
+    name: '',
+    email: '',
+    password: '',
   });
   const handleFormData = ({ target }: any) => {
     setNewUser({
@@ -27,7 +31,12 @@ function SignUpForm() {
   };
 
   const registerNewUser = async (formData: NewUserShape) => {
-    console.log(formData);
+    setErrorMessage('');
+    const response = await signUpUser(formData);
+    if (response.id) {
+      redirectToLoginPage();
+    }
+    setErrorMessage('E-mail já cadastrado.');
   };
 
   const formValidate = (formData: NewUserShape) => {
@@ -43,7 +52,8 @@ function SignUpForm() {
 
     if (formData.password.length < 6 || !formData.password) {
       return true;
-    } return false;
+    }
+    return false;
   };
 
   return (
@@ -66,7 +76,6 @@ function SignUpForm() {
             type="email"
             placeholder="E-mail"
             onChange={(e: any) => handleFormData(e)}
-
           />
         </div>
         <div>
@@ -75,9 +84,9 @@ function SignUpForm() {
             type="password"
             placeholder="Senha"
             onChange={(e: any) => handleFormData(e)}
-
           />
         </div>
+        {errorMessage.length !== 0 && <p>{errorMessage}</p>}
         <div>
           <SignUpComponentButton
             onClick={() => registerNewUser(newUser)}
@@ -85,7 +94,6 @@ function SignUpForm() {
             disabled={formValidate(newUser)}
           >
             Registrar
-
           </SignUpComponentButton>
         </div>
       </SignUpComponentForm>
