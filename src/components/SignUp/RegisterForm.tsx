@@ -1,5 +1,5 @@
 import Router from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SignUpComponentButton,
   SignUpComponentContainer,
@@ -9,12 +9,25 @@ import {
   SignUpComponentLinkContainer,
   SignUpComponentTitle,
 } from '.';
+import { NewUserShape } from '../../services/userApi';
 
 const redirectToLoginPage = () => {
   Router.push('/');
 };
 
 function SignUpForm() {
+  const [newUser, setNewUser] = useState<NewUserShape>();
+  const handleFormData = ({ target }: any) => {
+    setNewUser({
+      ...newUser,
+      [target.id]: target.value,
+    });
+  };
+
+  const registerNewUser = (formData: NewUserShape) => {
+    console.log(formData);
+  };
+
   return (
     <SignUpComponentContainer>
       <SignUpComponentTitle>
@@ -22,16 +35,39 @@ function SignUpForm() {
       </SignUpComponentTitle>
       <SignUpComponentForm>
         <div>
-          <SignUpComponentInput type="text" placeholder="Nome" />
+          <SignUpComponentInput
+            id="name"
+            type="text"
+            placeholder="Nome"
+            onChange={(e: any) => handleFormData(e)}
+          />
         </div>
         <div>
-          <SignUpComponentInput type="email" placeholder="E-mail" />
+          <SignUpComponentInput
+            id="email"
+            type="email"
+            placeholder="E-mail"
+            onChange={(e: any) => handleFormData(e)}
+
+          />
         </div>
         <div>
-          <SignUpComponentInput type="password" placeholder="Senha" />
+          <SignUpComponentInput
+            id="password"
+            type="password"
+            placeholder="Senha"
+            onChange={(e: any) => handleFormData(e)}
+
+          />
         </div>
         <div>
-          <SignUpComponentButton type="button">Registrar</SignUpComponentButton>
+          <SignUpComponentButton
+            onClick={() => registerNewUser(newUser)}
+            type="button"
+          >
+            Registrar
+
+          </SignUpComponentButton>
         </div>
       </SignUpComponentForm>
       <SignUpComponentLinkContainer>
