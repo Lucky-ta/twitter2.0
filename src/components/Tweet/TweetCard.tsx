@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { BsArrowLeftShort, BsEmojiSmile } from 'react-icons/bs';
 import { IoImageOutline } from 'react-icons/io5';
@@ -6,7 +7,6 @@ import { ImParagraphLeft } from 'react-icons/im';
 import { TbCalendarTime } from 'react-icons/tb';
 import { FaGlobeAmericas } from 'react-icons/fa';
 import { HiOutlineLocationMarker } from 'react-icons/hi';
-import { useRouter } from 'next/router';
 import { UserProfilePicture } from '../Home';
 import ProfilePicture from '../../public/icons/blank-profile-picture.png';
 import {
@@ -31,7 +31,11 @@ function TweetCard() {
   };
 
   const postNewTweet = async () => {
-    await createTweet(tweet, userToken);
+    const response = await createTweet(tweet, userToken);
+    if (response.id) {
+      return redirectToHomePage();
+    }
+    return window.alert('Tweet inválido');
   };
 
   return (
