@@ -6,6 +6,11 @@ export type NewUserShape = {
     password: string
 }
 
+export type UserCredentialsShape = {
+  email: string,
+  password: string
+}
+
 const signUpUser = async (newUser: NewUserShape) => {
   try {
     const result = await Api.post('/user/create', newUser);
@@ -15,4 +20,13 @@ const signUpUser = async (newUser: NewUserShape) => {
   }
 };
 
-export { signUpUser };
+const signInUser = async (userCredentials: UserCredentialsShape) => {
+  try {
+    const result = await Api.post('/user/login', userCredentials);
+    return result.data;
+  } catch (e: any) {
+    return { message: e.message };
+  }
+};
+
+export { signUpUser, signInUser };
