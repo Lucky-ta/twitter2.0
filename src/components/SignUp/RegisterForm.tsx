@@ -16,7 +16,9 @@ const redirectToLoginPage = () => {
 };
 
 function SignUpForm() {
-  const [newUser, setNewUser] = useState<NewUserShape>();
+  const [newUser, setNewUser] = useState<NewUserShape>({
+    name: '', email: '', password: '',
+  });
   const handleFormData = ({ target }: any) => {
     setNewUser({
       ...newUser,
@@ -24,8 +26,24 @@ function SignUpForm() {
     });
   };
 
-  const registerNewUser = (formData: NewUserShape) => {
+  const registerNewUser = async (formData: NewUserShape) => {
     console.log(formData);
+  };
+
+  const formValidate = (formData: NewUserShape) => {
+    if (formData.name.length < 3 || !formData.name) {
+      return true;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isEmailValid = emailRegex.test(formData.email);
+    if (formData.email.length === 0 || !isEmailValid) {
+      return true;
+    }
+
+    if (formData.password.length < 6 || !formData.password) {
+      return true;
+    } return false;
   };
 
   return (
@@ -64,6 +82,7 @@ function SignUpForm() {
           <SignUpComponentButton
             onClick={() => registerNewUser(newUser)}
             type="button"
+            disabled={formValidate(newUser)}
           >
             Registrar
 
