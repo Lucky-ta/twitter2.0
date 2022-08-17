@@ -19,8 +19,10 @@ import {
   TweetTextArea,
   TweetVisiblityOptionContainer,
 } from '.';
+import { createTweet } from '../../services/tweetApi';
 
 function TweetCard() {
+  const userToken = localStorage.getItem('userToken');
   const [tweet, setTweet] = useState('');
 
   const router = useRouter();
@@ -28,8 +30,8 @@ function TweetCard() {
     router.push('/home');
   };
 
-  const postNewTweet = (text: string) => {
-    console.log(text);
+  const postNewTweet = async () => {
+    await createTweet(tweet, userToken);
   };
 
   return (
@@ -66,7 +68,7 @@ function TweetCard() {
             disabled={tweet.length === 0}
             type="button"
             aria-label="tweet-button"
-            onClick={() => postNewTweet(tweet)}
+            onClick={() => postNewTweet()}
           >
             Tweetar
           </TweetButton>

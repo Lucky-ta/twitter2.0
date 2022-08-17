@@ -35,6 +35,7 @@ function LoginForm() {
     setErrorMessage('');
     const response = await signInUser(userCredentials);
     if (typeof response === 'string') {
+      localStorage.setItem('userToken', response);
       return redirectToHomePage();
     }
     return setErrorMessage('Usuário inválido');

@@ -2,7 +2,7 @@ import Api from './Api';
 
 const createTweet = async (tweet: string, userToken: string) => {
   try {
-    const response = await Api.post('/tweet/create', tweet, {
+    const response = await Api.post('/tweet/create', { tweet }, {
       headers: { Authorization: userToken },
     });
     return response.data;
