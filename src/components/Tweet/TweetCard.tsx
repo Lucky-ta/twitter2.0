@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BsArrowLeftShort, BsEmojiSmile } from 'react-icons/bs';
 import { IoImageOutline } from 'react-icons/io5';
 import { AiOutlineFileGif } from 'react-icons/ai';
@@ -21,9 +21,15 @@ import {
 } from '.';
 
 function TweetCard() {
+  const [tweet, setTweet] = useState('');
+
   const router = useRouter();
   const redirectToHomePage = () => {
     router.push('/home');
+  };
+
+  const postNewTweet = (text: string) => {
+    console.log(text);
   };
 
   return (
@@ -48,6 +54,7 @@ function TweetCard() {
             id=""
             cols={30}
             rows={10}
+            onChange={({ target }: any) => setTweet(target.value)}
           />
           <TweetVisiblityOptionContainer>
             <FaGlobeAmericas />
@@ -55,7 +62,12 @@ function TweetCard() {
           </TweetVisiblityOptionContainer>
         </div>
         <div>
-          <TweetButton disabled type="button" aria-label="tweet-button">
+          <TweetButton
+            disabled={tweet.length === 0}
+            type="button"
+            aria-label="tweet-button"
+            onClick={() => postNewTweet(tweet)}
+          >
             Tweetar
           </TweetButton>
         </div>

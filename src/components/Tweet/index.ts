@@ -54,6 +54,7 @@ export const TweetTextArea = styled.textarea`
 
     white-space: pre-wrap;
     position: relative;
+    color: white;
 `;
 
 export const TweetButtonsContainer = styled.div`
