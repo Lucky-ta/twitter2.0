@@ -1,5 +1,17 @@
 import React from 'react';
-import { EditOptionsContainer, EditProfileButton, ProfileCategories, ProfileCategoriesOptions, ProfileContactContainer, ProfileInfoContainer, ProfilePicture, ProfileUserName, ProfileWallPapper } from '.';
+import { AiOutlineLinkedin, AiFillGithub } from 'react-icons/ai';
+import { CgProfile } from 'react-icons/cg';
+import {
+  ContactButton,
+  EditOptionsContainer,
+  EditProfileButton,
+  ProfileCategories,
+  ProfileCategoriesOptions,
+  ProfileContactContainer,
+  ProfilePicture,
+  ProfileUserName,
+  ProfileWallPapper,
+} from '.';
 
 function ProfileInfo() {
   return (
@@ -11,9 +23,18 @@ function ProfileInfo() {
         <ProfileUserName>User Name</ProfileUserName>
       </EditOptionsContainer>
       <ProfileContactContainer>
-        <span>Linkedin</span>
-        <span>GitHub</span>
-        <span>Portfolio</span>
+        <ContactButton type="button">
+          <AiOutlineLinkedin />
+          Linkedin
+        </ContactButton>
+        <ContactButton type="button">
+          <AiFillGithub />
+          GitHub
+        </ContactButton>
+        <ContactButton type="button">
+          <CgProfile />
+          Portfolio
+        </ContactButton>
       </ProfileContactContainer>
       <ProfileCategories>
         <ProfileCategoriesOptions>Tweets</ProfileCategoriesOptions>

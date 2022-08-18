@@ -91,5 +91,19 @@ export const ProfileContactContainer = styled.div`
     flex-direction: column;
     padding-left: 0.8em;
     padding-top: 1em;
-    gap: 0.3em;
+    gap: 0.4em;
+`;
+
+export const ContactButton = styled.button`
+    background: none;
+    border: none;
+    color: white;
+    display: flex;
+    gap: 1em;
+    font-size: 0.9em;
+
+    &&:hover {
+        color:rgb(29, 155, 240) ;
+        cursor: pointer;
+    }
 `;

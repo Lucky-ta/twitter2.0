@@ -36,7 +36,7 @@ function Main({ data }: MainPropsShape) {
       <GlobalPageContainer>
         <Header title="Página Inicial" />
         <HeaderSpacing />
-        {data.slice(0, visible).map((tweet) => (
+        {data.reverse().slice(0, visible).map((tweet) => (
           <MainContent tweets={tweet} />
         ))}
         {data.length !== visible && (
