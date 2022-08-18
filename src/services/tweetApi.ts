@@ -22,4 +22,13 @@ const deleteTweet = async (tweetId: string, userToken: string) => {
   }
 };
 
-export { createTweet, deleteTweet };
+const getAllTweets = async () => {
+  try {
+    const response = await Api.get('/tweet/');
+    return response.data;
+  } catch (e: any) {
+    return { message: e.message };
+  }
+};
+
+export { createTweet, deleteTweet, getAllTweets };

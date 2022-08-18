@@ -15,8 +15,13 @@ import {
   MainContentHeader,
   UserProfilePicture,
 } from '.';
+import { TweetsShape } from '../../pages/home';
 
-function MainContent() {
+export interface MainContentPropsShape {
+  tweets: TweetsShape;
+}
+
+function MainContent({ tweets }: MainContentPropsShape) {
   const router = useRouter();
   const redirectToTweetPage = () => {
     router.push('/compose/tweet');
@@ -30,18 +35,13 @@ function MainContent() {
           tweetProfilePicture
           src={ProfilePicture.src}
         />
-        <h2>User Name</h2>
+        <h2>{tweets.User.name}</h2>
         <MainContentFilterButton type="button" aria-label="dots-option-button">
           <BsThreeDots />
         </MainContentFilterButton>
       </MainContentHeader>
       <div>
-        <p role="paragraph">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi,
-          eum eligendi. Provident in vitae optio odio, maiores placeat
-          voluptates non facilis quaerat, harum culpa consequuntur laborum
-          numquam suscipit! Et, qui.
-        </p>
+        <p role="paragraph">{tweets.tweet}</p>
       </div>
       <MainContentButtonsContainer>
         <MainContentButtons type="button" aria-label="comment-button">
