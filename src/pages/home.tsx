@@ -1,5 +1,5 @@
 import React from 'react';
-import { HeaderSpacing } from '../components/Home';
+import { FooterSpacing, HeaderSpacing } from '../components/Home';
 import Footer from '../components/Home/Footer';
 import Header from '../components/Home/Header';
 import MainContent from '../components/Home/MainContent';
@@ -23,6 +23,7 @@ function Main({ data }: MainPropsShape) {
       <Header title="Página Inicial" />
       <HeaderSpacing />
       { data.map((tweet) => <MainContent tweets={tweet} />) }
+      <FooterSpacing />
       <Footer />
     </GlobalPageContainer>
   );

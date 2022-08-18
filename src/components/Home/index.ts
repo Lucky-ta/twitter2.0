@@ -22,6 +22,10 @@ export const HeaderSpacing = styled.div`
     padding-top: 3.1em;
 `;
 
+export const FooterSpacing = styled.div`
+    padding-top: 3.1em;
+`;
+
 export const HeaderTitle = styled.h1`
     padding-left: 1.4em;
 `;
@@ -78,6 +82,8 @@ export const MainContentContainer = styled.main`
     border-top: 1px solid;
     border-bottom: 1px solid;
     border-color: rgba(128,128,128, 0.3);
+
+    background-color: black;
 `;
 
 export const CreateTweetButton = styled.button`
