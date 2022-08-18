@@ -142,3 +142,20 @@ export const MainContentButtons = styled.button`
     color: grey;
     font-size: 1.2em;
 `;
+
+export const ShowMoreButton = styled.button`
+display: flex;
+    color: #00b9ff;
+    width: 100%;
+    background: none;
+    border: none;
+    padding-bottom: 1.8em;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    padding-top: 1em;
+
+    font-size: 1em;
+    font-weight: 500;
+`;

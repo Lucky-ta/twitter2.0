@@ -1,5 +1,5 @@
-import React from 'react';
-import { FooterSpacing, HeaderSpacing } from '../components/Home';
+import React, { useState } from 'react';
+import { FooterSpacing, HeaderSpacing, ShowMoreButton } from '../components/Home';
 import Footer from '../components/Home/Footer';
 import Header from '../components/Home/Header';
 import MainContent from '../components/Home/MainContent';
@@ -18,11 +18,24 @@ interface MainPropsShape {
 }
 
 function Main({ data }: MainPropsShape) {
+  const [visible, setVisible] = useState(7);
+  const showMoreTweets = () => {
+    setVisible(data.length);
+  };
   return (
     <GlobalPageContainer>
       <Header title="Página Inicial" />
       <HeaderSpacing />
-      { data.map((tweet) => <MainContent tweets={tweet} />) }
+      { data.slice(0, visible).map((tweet) => <MainContent tweets={tweet} />) }
+      { data.length !== visible && (
+        <ShowMoreButton
+          onClick={showMoreTweets}
+          type="button"
+        >
+          mostrar mais
+
+        </ShowMoreButton>
+      ) }
       <FooterSpacing />
       <Footer />
     </GlobalPageContainer>
