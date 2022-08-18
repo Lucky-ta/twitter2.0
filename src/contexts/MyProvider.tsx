@@ -9,17 +9,21 @@ interface MyProviderPropsShape {
 
 function MyProvider({ children }: MyProviderPropsShape) {
   const [isValidUser, setIsValidUser] = useState(false);
+  const [userData, setUserData] = useState(false);
 
   const datas: any = {
     isValidUser,
     setIsValidUser,
+    userData,
+    setUserData,
   };
 
   useEffect(() => {
     const storagedUserToken = localStorage.getItem('userToken');
     if (storagedUserToken) {
       try {
-        isAuthenticated(storagedUserToken);
+        const authUser: any = isAuthenticated(storagedUserToken);
+        setUserData(authUser);
         setIsValidUser(true);
       } catch (e: any) {
         setIsValidUser(false);

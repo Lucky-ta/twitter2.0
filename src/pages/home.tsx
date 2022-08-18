@@ -15,11 +15,12 @@ import ErrorPage from './error';
 export type TweetsShape = {
   tweet: string;
   User: {
-    name: string;
+    name: string,
+    id: number,
   };
 };
 
-interface MainPropsShape {
+export interface MainPropsShape {
   data: TweetsShape[];
 }
 
