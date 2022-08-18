@@ -97,7 +97,7 @@ export const CreateTweetButton = styled.button`
     font-size: 1.6em;
     padding: 0.5em 0.6em;
 
-    position: absolute;
+    position: fixed;
     right: 0.8em;
     bottom: 2.7em;
 
