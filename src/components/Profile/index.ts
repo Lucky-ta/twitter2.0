@@ -39,6 +39,10 @@ export const ProfilePicture = styled.img`
     left: 1em;
 
     transform: translate(0em, -3.1em);
+
+    &&:hover {
+        cursor: pointer;
+    }
 `;
 
 export const EditProfileButton = styled.button`
@@ -60,6 +64,10 @@ export const EditProfileButton = styled.button`
     position: absolute;
     margin-top: 0.6em;
     right: 1em;
+
+    &&:hover {
+        cursor: pointer;
+    }
 `;
 
 export const EditOptionsContainer = styled.div`
@@ -84,6 +92,10 @@ export const ProfileCategories = styled.div`
 export const ProfileCategoriesOptions = styled.p`
     border-bottom: 4px solid rgb(29, 155, 240);
     height: 2.4em;
+
+    &&:hover {
+        cursor: pointer;
+    }
 `;
 
 export const ProfileContactContainer = styled.div`

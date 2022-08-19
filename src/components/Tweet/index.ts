@@ -2,6 +2,10 @@ import styled from 'styled-components';
 
 export const LeftArrowButton = styled.div`
     font-size: 1.6em;
+
+    &&:hover {
+        cursor: pointer;
+    }
 `;
 
 export const TweetPageContainer = styled.main`
