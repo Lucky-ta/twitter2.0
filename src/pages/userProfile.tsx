@@ -69,8 +69,7 @@ function UserProfile({ data }: MainPropsShape) {
         <MainContent tweets={tweet} />
       ))}
       <EditProfileButton type="button">Editar perfil</EditProfileButton>
-      <ProfileUserName>User Name</ProfileUserName>
-
+      <ProfileUserName>{userData.name}</ProfileUserName>
       <Footer />
       <FooterSpacing />
     </GlobalPageContainer>
