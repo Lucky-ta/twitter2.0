@@ -127,6 +127,14 @@ export const ProfileForm = styled.form`
 
     padding-left: 1.6em;
     padding-right: 1.6em;
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:focus {
+        transition: background-color 600000s 0s, color 600000s 0s;
+    }
+    input[data-autocompleted] {
+        background-color: transparent !important;
+    }
 `;
 
 export const FormInput = styled.input`
@@ -161,5 +169,27 @@ export const FormTextArea = styled.textarea`
     &&:focus {
         outline: none !important;
         border:2px solid #1D9BF0;
+    }
+`;
+
+export const SaveProfilFormButton = styled.button`
+    background: none;
+    border: none;
+
+    background-color: rgb(239, 243, 244);;
+    color: black;
+
+    font-size: 1.4em;
+    font-weight: 600;
+    border-radius: 99em;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+
+    margin: auto;
+    margin-right: 0.4em;
+    &&:hover {
+        cursor: pointer;
     }
 `;
