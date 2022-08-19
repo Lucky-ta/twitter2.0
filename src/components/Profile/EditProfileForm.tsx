@@ -4,6 +4,8 @@ import {
 } from './index';
 
 export interface FormDataShape {
+  profilePicture: string;
+  profileWallPapper: string;
   name: string;
   bio: string;
   localization: string;
