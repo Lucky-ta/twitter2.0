@@ -62,7 +62,7 @@ export const EditProfileButton = styled.button`
 
     max-height: 3em;
     position: absolute;
-    margin-top: 0.6em;
+    top: 12em;
     right: 1em;
 
     &&:hover {
@@ -117,5 +117,49 @@ export const ContactButton = styled.button`
     &&:hover {
         color:rgb(29, 155, 240) ;
         cursor: pointer;
+    }
+`;
+
+export const ProfileForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+
+    padding-left: 1.6em;
+    padding-right: 1.6em;
+`;
+
+export const FormInput = styled.input`
+    background: none;
+    border: none;
+
+    border: 1px solid rgb(255, 255, 255, 0.34);
+    border-radius: 4px;
+    color: grey;
+    height: 5em;
+
+    padding-left: 1em;
+    padding-bottom: 1.6em;
+
+    &&:focus {
+        outline: none !important;
+        border:2px solid #1D9BF0;
+    }
+`;
+
+export const FormTextArea = styled.textarea`
+    background: none;
+    border: none;
+
+    border: 1px solid rgb(255, 255, 255, 0.34);
+    border-radius: 4px;
+    color: grey;
+    height: 8em;
+
+    padding-left: 1em;
+    padding-top: 1em;
+    &&:focus {
+        outline: none !important;
+        border:2px solid #1D9BF0;
     }
 `;
