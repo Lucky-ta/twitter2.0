@@ -193,3 +193,25 @@ export const SaveProfilFormButton = styled.button`
         cursor: pointer;
     }
 `;
+
+export const DeleteUserButton = styled.button`
+    background: none;
+    border: none;
+
+    background-color: rgb(244, 33, 46);
+    color: white;
+
+    font-size: 1.4em;
+    font-weight: 600;
+    border-radius: 99em;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+
+    position:absolute;
+    bottom: 1.4em;
+    &&:hover {
+        cursor: pointer;
+    }
+`;

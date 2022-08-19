@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
-  FormInput, FormTextArea, ProfileForm, SaveProfilFormButton,
+  DeleteUserButton,
+  FormInput, ProfileForm, SaveProfilFormButton,
 } from './index';
 
 export interface FormDataShape {
@@ -29,17 +30,6 @@ function EditProfileForm() {
         placeholder="Nome"
         type="text"
       />
-      <FormTextArea
-        id="bio"
-        onChange={(e) => handleFormData(e)}
-        placeholder="Bio"
-      />
-      <FormInput
-        id="localization"
-        onChange={(e) => handleFormData(e)}
-        placeholder="Localização"
-        type="text"
-      />
       <SaveProfilFormButton
         onClick={() => saveUserChanges(formData)}
         type="button"
@@ -47,6 +37,7 @@ function EditProfileForm() {
         Salvar
 
       </SaveProfilFormButton>
+      <DeleteUserButton>Excluir conta</DeleteUserButton>
     </ProfileForm>
   );
 }
