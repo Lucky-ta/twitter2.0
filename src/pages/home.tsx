@@ -1,8 +1,5 @@
-import { useRouter } from 'next/router';
 import React, { useContext, useState } from 'react';
-import { RiQuillPenFill } from 'react-icons/ri';
 import {
-  CreateTweetButton,
   FooterSpacing,
   HeaderSpacing,
   ShowMoreButton,
@@ -36,30 +33,21 @@ function Main({ data }: MainPropsShape) {
     setVisible(data.length);
   };
 
-  const router = useRouter();
-  const redirectToTweetPage = () => {
-    router.push('/compose/tweet');
-  };
-
   if (isValidUser) {
     return (
       <GlobalPageContainer>
         <Header title="Página Inicial" />
         <HeaderSpacing />
-        { myAccount.map((tweet) => (<MainContent tweets={tweet} />)) }
-        {data
-          .reverse()
-          .slice(0, visible)
-          .map((tweet) => (
-            <MainContent tweets={tweet} />
-          ))}
-        <CreateTweetButton
-          onClick={redirectToTweetPage}
-          type="button"
-          aria-label="create-tweet-button"
-        >
-          <RiQuillPenFill />
-        </CreateTweetButton>
+        <div>
+          { myAccount.map((tweet) => (<MainContent tweets={tweet} />)) }
+          {data
+            .reverse()
+            .slice(0, visible)
+            .map((tweet) => (
+              <MainContent tweets={tweet} />
+            ))}
+
+        </div>
         {data.length > visible && (
           <ShowMoreButton onClick={showMoreTweets} type="button">
             mostrar mais

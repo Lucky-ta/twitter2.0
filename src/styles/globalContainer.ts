@@ -8,6 +8,12 @@ export const GlobalPageContainer = styled.div`
     font-family: sans-serif;
     width: 100vw;
     height: 100vh;
+
+    @media(min-width: 500px) {
+        display: flex;
+        flex-direction: row-reverse;
+        
+  }
 `;
 
 export const SignUpForm = styled.div``;

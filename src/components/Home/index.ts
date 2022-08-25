@@ -16,14 +16,25 @@ export const MainPageHeader = styled.header`
     position: fixed;
     background-color: rgba(0, 0, 0, 0.61);
     backdrop-filter: blur(5px);
+    
+    @media(min-width: 500px) {
+  }
 `;
 
 export const HeaderSpacing = styled.div`
     padding-top: 3.1em;
+
+    @media(min-width: 500px) {
+        display: none;
+  }
 `;
 
 export const FooterSpacing = styled.div`
     padding-top: 3.1em;
+
+    @media(min-width: 500px) {
+        display: none;
+  }
 `;
 
 export const HeaderTitle = styled.h1`
@@ -70,6 +81,17 @@ export const FooterContainer = styled.footer`
     padding-bottom: 0.4em;
 
     justify-content: space-around;
+
+    @media(min-width: 500px) {
+        flex-direction: column;
+        height: 100%;
+        justify-content: initial;
+        gap: 3em;
+        padding-top: 6em;
+        width: 20%;
+        position: initial;
+        border-right: 1px solid rgba(255, 255, 255, 0.21);
+  }
 `;
 
 export const FooterButtons = styled.button`
@@ -110,6 +132,12 @@ export const CreateTweetButton = styled.button`
     &:hover{
         cursor: pointer;
     }
+
+    @media(min-width: 500px) {
+        position: initial;
+        margin: auto;
+        margin-top: 3em;
+  }
 `;
 
 export const MainContentHeader = styled.div`
