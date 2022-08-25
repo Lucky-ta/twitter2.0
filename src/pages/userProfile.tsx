@@ -7,7 +7,6 @@ import Footer from '../components/Home/Footer';
 import ProfileHeader from '../components/Profile/ProfileHeader';
 import MyContext from '../contexts/MyContext';
 import { getAllTweets } from '../services/tweetApi';
-import { GlobalPageContainer } from '../styles/globalContainer';
 import { MainPropsShape, TweetsShape } from './home';
 import { FooterSpacing, HeaderSpacing } from '../components/Home';
 import ProfileInfo from '../components/Profile/ProfileInfo';
@@ -17,6 +16,7 @@ import {
   ProfileCategories,
   ProfileCategoriesOptions,
   ProfileContactContainer,
+  ProfileContainer,
   ProfileUserName,
 } from '../components/Profile';
 
@@ -37,10 +37,11 @@ function UserProfile({ data }: MainPropsShape) {
     Router.push('/settings/profile');
   };
   return (
-    <GlobalPageContainer>
+    <ProfileContainer>
       <ProfileHeader title="Perfil" />
       <HeaderSpacing />
       <ProfileInfo />
+      <ProfileUserName>{userData.name}</ProfileUserName>
       <ProfileContactContainer>
         <ContactButton
           id="https://www.linkedin.com/in/lucasmaieski/"
@@ -80,10 +81,9 @@ function UserProfile({ data }: MainPropsShape) {
         Editar perfil
 
       </EditProfileButton>
-      <ProfileUserName>{userData.name}</ProfileUserName>
       <Footer />
       <FooterSpacing />
-    </GlobalPageContainer>
+    </ProfileContainer>
   );
 }
 

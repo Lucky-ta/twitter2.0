@@ -19,6 +19,21 @@ export const ProfileHeaderContainer = styled.div`
     backdrop-filter: blur(5px);
 
     z-index: 9999;
+
+`;
+
+export const ProfileContainer = styled.div`
+    background-color: black;
+    color: white;
+
+    display: block;
+    font-family: sans-serif;
+    width: 100vw;
+    height: 100vh;
+
+    @media(min-width: 500px) {
+        padding-left: 6em;
+  }
 `;
 
 export const ProfileWallPapper = styled.img`
@@ -75,9 +90,8 @@ export const EditOptionsContainer = styled.div`
 `;
 
 export const ProfileUserName = styled.h3`
-    position: absolute;
-    left: 0.6em;
-    top: 13em;
+    padding-left: 1em;
+    transform: translate(2px, -26px);
 `;
 
 export const ProfileCategories = styled.div`
