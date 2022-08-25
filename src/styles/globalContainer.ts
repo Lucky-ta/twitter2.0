@@ -12,7 +12,6 @@ export const GlobalPageContainer = styled.div`
     @media(min-width: 500px) {
         display: flex;
         flex-direction: row-reverse;
-        
   }
 `;
 

@@ -12,6 +12,12 @@ export const TweetPageContainer = styled.main`
     padding-top: 0.6em;
     padding-left: 0.8em;
     padding-right: 0.8em;
+    
+    padding-bottom: 1em;
+
+    @media(max-width: 500px) {
+        display: none;
+  }
 `;
 
 export const TweetButton = styled.button`

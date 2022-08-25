@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import {
   FooterSpacing,
   HeaderSpacing,
+  MainContentHomeContainer,
   ShowMoreButton,
 } from '../components/Home';
 import Footer from '../components/Home/Footer';
@@ -12,6 +13,7 @@ import { getAllTweets } from '../services/tweetApi';
 import { GlobalPageContainer } from '../styles/globalContainer';
 import myAccount from '../services/myAccountMock/myAccount';
 import ErrorPage from './error';
+import TweetCard from '../components/Tweet/TweetCard';
 
 export type TweetsShape = {
   tweet: string;
@@ -38,7 +40,8 @@ function Main({ data }: MainPropsShape) {
       <GlobalPageContainer>
         <Header title="Página Inicial" />
         <HeaderSpacing />
-        <div>
+        <MainContentHomeContainer>
+          <TweetCard />
           { myAccount.map((tweet) => (<MainContent tweets={tweet} />)) }
           {data
             .reverse()
@@ -47,7 +50,7 @@ function Main({ data }: MainPropsShape) {
               <MainContent tweets={tweet} />
             ))}
 
-        </div>
+        </MainContentHomeContainer>
         {data.length > visible && (
           <ShowMoreButton onClick={showMoreTweets} type="button">
             mostrar mais

@@ -18,6 +18,7 @@ export const MainPageHeader = styled.header`
     backdrop-filter: blur(5px);
     
     @media(min-width: 500px) {
+        padding-left: 5em;
   }
 `;
 
@@ -84,12 +85,11 @@ export const FooterContainer = styled.footer`
 
     @media(min-width: 500px) {
         flex-direction: column;
-        height: 100%;
-        justify-content: initial;
+        height: 100vh;
         gap: 3em;
         padding-top: 6em;
-        width: 20%;
-        position: initial;
+        width: 6em;
+        left: 0;
         border-right: 1px solid rgba(255, 255, 255, 0.21);
   }
 `;
@@ -190,4 +190,12 @@ display: flex;
 
     font-size: 1em;
     font-weight: 500;
+`;
+
+export const MainContentHomeContainer = styled.div`
+    @media(min-width: 500px) {
+        width: 100%;
+        height: 100%;
+        padding-left: 6rem;
+  }
 `;
