@@ -17,6 +17,7 @@ import TweetCard from '../components/Tweet/TweetCard';
 
 export type TweetsShape = {
   tweet: string;
+  id?: number;
   User: {
     name: string;
     id: number;

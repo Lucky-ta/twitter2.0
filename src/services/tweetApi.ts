@@ -11,9 +11,9 @@ const createTweet = async (tweet: string, userToken: string) => {
   }
 };
 
-const deleteTweet = async (tweetId: string, userToken: string) => {
+const deleteTweet = async (tweetId: number, userToken: string) => {
   try {
-    const response = await Api.post(`/tweet/${tweetId}`, {
+    const response = await Api.delete(`/tweet/${tweetId}`, {
       headers: { Authorization: userToken },
     });
     return response.data;

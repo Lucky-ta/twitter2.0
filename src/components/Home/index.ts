@@ -108,8 +108,8 @@ export const FooterButtons = styled.button`
 
 export const MainContentContainer = styled.main`
     width: 100%;
-    padding-left: 0.6em;
-    padding-right: 0.6em;
+    padding-left: 1.6em;
+    padding-right: 2em;
     border-top: 1px solid;
     border-bottom: 1px solid;
     border-color: rgba(128,128,128, 0.3);
@@ -163,6 +163,10 @@ export const MainContentFilterButton = styled.button`
 
     margin: auto;
     margin-right: 0em;
+
+    &&:hover {
+        cursor: pointer;
+    }
 `;
 
 export const MainContentButtonsContainer = styled.div`
