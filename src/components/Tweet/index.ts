@@ -43,9 +43,11 @@ export const TweetButton = styled.button`
     margin-right: 0.8em;
 
     position: fixed;
-    top: 0;
     right: 0;
 
+    @media(max-width: 500px) {
+        top: 0;
+  }
 `;
 
 export const TweetContainer = styled.div`

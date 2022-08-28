@@ -51,6 +51,11 @@ export const HeaderFilterButton = styled.button`
 
     margin: auto;
     margin-right: 1em;
+
+    
+    @media(max-width: 500px) {
+        display: none;
+  }
 `;
 
 interface UserProfilePictureProps {
