@@ -20,20 +20,18 @@ import {
   TweetVisiblityOptionContainer,
 } from '.';
 import { createTweet } from '../../services/tweetApi';
+import { redirectToHomePage } from '../../utils/redirectFunctions';
 
 function TweetCard() {
   const userToken = localStorage.getItem('userToken');
   const [tweet, setTweet] = useState('');
 
   const router = useRouter();
-  const redirectToHomePage = () => {
-    router.push('/home');
-  };
 
   const postNewTweet = async () => {
     const response = await createTweet(tweet, userToken);
     if (response.id) {
-      return redirectToHomePage();
+      return redirectToHomePage(router);
     }
     return window.alert('Tweet inválido');
   };

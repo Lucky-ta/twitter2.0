@@ -4,15 +4,13 @@ import { RiHome7Fill, RiQuillPenFill } from 'react-icons/ri';
 import { FiSearch, FiBell, FiMail } from 'react-icons/fi';
 import { useRouter } from 'next/router';
 import { CreateTweetButton, FooterButtons, FooterContainer } from '.';
+import { redirectToTweetPage } from '../../utils/redirectFunctions';
 
 function Footer() {
+  const router = useRouter();
+
   const jumpToTopBrowser = () => {
     window.scroll(0, 0);
-  };
-
-  const router = useRouter();
-  const redirectToTweetPage = () => {
-    router.push('/compose/tweet');
   };
 
   return (
@@ -30,7 +28,7 @@ function Footer() {
         <FiMail />
       </FooterButtons>
       <CreateTweetButton
-        onClick={redirectToTweetPage}
+        onClick={() => redirectToTweetPage(router)}
         type="button"
         aria-label="create-tweet-button"
       >

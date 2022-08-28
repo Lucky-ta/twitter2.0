@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { BsArrowLeftShort } from 'react-icons/bs';
 import { ProfileHeaderContainer } from '.';
+import { redirectToHomePage } from '../../utils/redirectFunctions';
 import { LeftArrowButton } from '../Tweet';
 
 export interface ProfileHeaderPropsShape {
@@ -10,16 +11,14 @@ export interface ProfileHeaderPropsShape {
 
 function ProfileHeader({ title }: ProfileHeaderPropsShape) {
   const router = useRouter();
-  const redirectToHomePage = () => {
-    router.push('/home');
-  };
+
   return (
     <ProfileHeaderContainer>
       <LeftArrowButton>
         <BsArrowLeftShort
           role="button"
           aria-label="previous-page-button"
-          onClick={redirectToHomePage}
+          onClick={() => redirectToHomePage(router)}
         />
       </LeftArrowButton>
       <h3>{ title }</h3>

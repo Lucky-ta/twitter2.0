@@ -1,4 +1,4 @@
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import {
   SignUpComponentButton,
@@ -10,12 +10,10 @@ import {
   SignUpComponentTitle,
 } from '.';
 import { NewUserShape, signUpUser } from '../../services/userApi';
-
-const redirectToLoginPage = () => {
-  Router.push('/');
-};
+import { redirectToSignInPage } from '../../utils/redirectFunctions';
 
 function SignUpForm() {
+  const router = useRouter();
   const [errorMessage, setErrorMessage] = useState('');
 
   const [newUser, setNewUser] = useState<NewUserShape>({
@@ -34,7 +32,7 @@ function SignUpForm() {
     setErrorMessage('');
     const response = await signUpUser(formData);
     if (response.id) {
-      redirectToLoginPage();
+      redirectToSignInPage(router);
     }
     setErrorMessage('E-mail já cadastrado.');
   };
@@ -99,7 +97,10 @@ function SignUpForm() {
       </SignUpComponentForm>
       <SignUpComponentLinkContainer>
         <p>Já tem uma conta?</p>
-        <SignUpComponentLink type="button" onClick={redirectToLoginPage}>
+        <SignUpComponentLink
+          type="button"
+          onClick={() => redirectToSignInPage(router)}
+        >
           Entrar
         </SignUpComponentLink>
       </SignUpComponentLinkContainer>

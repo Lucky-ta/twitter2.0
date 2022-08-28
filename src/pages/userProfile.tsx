@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AiFillGithub, AiOutlineLinkedin } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
-import Router from 'next/router';
 import MainContent from '../components/Home/MainContent';
 import Footer from '../components/Home/Footer';
 import ProfileHeader from '../components/Profile/ProfileHeader';
@@ -33,9 +32,6 @@ function UserProfile({ data }: MainPropsShape) {
     window.location.href = contactLink;
   };
 
-  const redirectToEditProfilePage = () => {
-    Router.push('/settings/profile');
-  };
   return (
     <ProfileContainer>
       <ProfileHeader title="Perfil" />
@@ -75,7 +71,6 @@ function UserProfile({ data }: MainPropsShape) {
         <MainContent tweets={tweet} />
       ))}
       <EditProfileButton
-        onClick={redirectToEditProfilePage}
         type="button"
       >
         Editar perfil

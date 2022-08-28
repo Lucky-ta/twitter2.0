@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { MenuOptionsButtons, MenuOptionsContainer } from '.';
 import { deleteTweet } from '../../services/tweetApi';
+import { redirectToHomePage } from '../../utils/redirectFunctions';
 
 interface MenuOptionsPropsShape {
   tweetId: number;
@@ -9,8 +10,6 @@ interface MenuOptionsPropsShape {
 
 function MenuOptions({ tweetId }: MenuOptionsPropsShape) {
   const router = useRouter();
-
-  const redirectToHomePage = (route: any) => route.push('/home');
 
   const userToken = localStorage.getItem('userToken');
   const excludeTweet = async () => {

@@ -1,7 +1,8 @@
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import FormButtonsContainer from '.';
 import { signInUser, UserCredentialsShape } from '../../services/userApi';
+import { redirectToHomePage, redirectToSignUpPage } from '../../utils/redirectFunctions';
 import {
   SignUpComponentButton,
   SignUpComponentContainer,
@@ -13,15 +14,8 @@ import {
 } from '../SignUp';
 
 function LoginForm() {
+  const router = useRouter();
   const [errorMessage, setErrorMessage] = useState('');
-
-  const redirectToRegisterPage = () => {
-    Router.push('/signUp');
-  };
-
-  const redirectToHomePage = () => {
-    Router.push('/home');
-  };
 
   const [credentials, setCredentials] = useState<UserCredentialsShape>();
   const handleFormData = ({ target }: any) => {
@@ -36,7 +30,7 @@ function LoginForm() {
     const response = await signInUser(userCredentials);
     if (typeof response === 'string') {
       localStorage.setItem('userToken', response);
-      return redirectToHomePage();
+      return redirectToHomePage(router);
     }
     return setErrorMessage('Usuário inválido');
   };
@@ -76,7 +70,7 @@ function LoginForm() {
       </SignUpComponentForm>
       <SignUpComponentLinkContainer>
         <p>Não tem uma conta?</p>
-        <SignUpComponentLink type="button" onClick={redirectToRegisterPage}>
+        <SignUpComponentLink type="button" onClick={() => redirectToSignUpPage(router)}>
           Inscreva-se
         </SignUpComponentLink>
       </SignUpComponentLinkContainer>
