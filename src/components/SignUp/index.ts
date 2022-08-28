@@ -8,6 +8,8 @@ export const SignUpPageHeader = styled.header`
 
 export const SignUpPageForm = styled.main`
     width: 100vw;
+    max-width: 40em;
+    margin: auto;
     margin-top: 8em;
 `;
 

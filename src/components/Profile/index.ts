@@ -177,6 +177,7 @@ export const FormTextArea = styled.textarea`
     border-radius: 4px;
     color: grey;
     height: 8em;
+    resize: none;
 
     padding-left: 1em;
     padding-top: 1em;

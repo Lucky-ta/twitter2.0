@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
+import { TweetCardPageContainer } from '../../components/Tweet';
 import TweetCard from '../../components/Tweet/TweetCard';
 import MyContext from '../../contexts/MyContext';
-import { GlobalPageContainer } from '../../styles/globalContainer';
 import ErrorPage from '../error';
 
 function Tweet() {
@@ -9,9 +9,9 @@ function Tweet() {
 
   if (isValidUser) {
     return (
-      <GlobalPageContainer>
+      <TweetCardPageContainer>
         <TweetCard />
-      </GlobalPageContainer>
+      </TweetCardPageContainer>
     );
   }
   return <ErrorPage />;

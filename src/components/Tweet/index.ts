@@ -1,5 +1,14 @@
 import styled from 'styled-components';
 
+export const TweetCardPageContainer = styled.div`
+    background-color: black;
+    color: white;
+    display: block;
+    font-family: sans-serif;
+    width: 100vw;
+    height: 100vh;
+`;
+
 export const LeftArrowButton = styled.div`
     font-size: 1.6em;
 
@@ -15,9 +24,6 @@ export const TweetPageContainer = styled.main`
     
     padding-bottom: 1em;
 
-    @media(max-width: 500px) {
-        display: none;
-  }
 `;
 
 export const TweetButton = styled.button`
@@ -56,6 +62,7 @@ export const TweetTextArea = styled.textarea`
     background: none;
     border: none;
     word-spacing: 0%;
+    resize: none;
 
     margin-top: 1em;
     font-size: 1.2em;
