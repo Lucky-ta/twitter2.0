@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AiFillGithub, AiOutlineLinkedin } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
+import { useRouter } from 'next/router';
 import MainContent from '../components/Home/MainContent';
 import Footer from '../components/Home/Footer';
 import ProfileHeader from '../components/Profile/ProfileHeader';
@@ -18,8 +19,10 @@ import {
   ProfileContainer,
   ProfileUserName,
 } from '../components/Profile';
+import { redirectToEditProfilePage } from '../utils/redirectFunctions';
 
 function UserProfile({ data }: MainPropsShape) {
+  const router = useRouter();
   const [userTweets, setUserTweets] = useState([]);
   const { userData } = useContext(MyContext);
 
@@ -71,10 +74,10 @@ function UserProfile({ data }: MainPropsShape) {
         <MainContent tweets={tweet} />
       ))}
       <EditProfileButton
+        onClick={() => redirectToEditProfilePage(router)}
         type="button"
       >
         Editar perfil
-
       </EditProfileButton>
       <Footer />
       <FooterSpacing />
