@@ -20,7 +20,10 @@ import {
   TweetVisiblityOptionContainer,
 } from '.';
 import { createTweet } from '../../services/tweetApi';
-import { redirectToHomePage, redirectToProfilePage } from '../../utils/redirectFunctions';
+import {
+  redirectToHomePage,
+  redirectToProfilePage,
+} from '../../utils/redirectFunctions';
 
 function TweetCard() {
   const userToken = localStorage.getItem('userToken');
@@ -38,12 +41,11 @@ function TweetCard() {
 
   return (
     <TweetPageContainer>
-      <LeftArrowButton>
-        <BsArrowLeftShort
-          role="button"
-          aria-label="previous-page-button"
-          onClick={redirectToHomePage}
-        />
+      <LeftArrowButton
+        aria-label="previous-page-button"
+        onClick={() => redirectToHomePage(router)}
+      >
+        <BsArrowLeftShort />
       </LeftArrowButton>
       <TweetContainer>
         <UserProfilePicture

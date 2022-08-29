@@ -8,8 +8,8 @@ describe('Test main page Footer component', () => {
     render(<Footer />);
   });
 
-  it('Main page footer must have 4 buttons', () => {
+  it('Main page footer must have 5 buttons', () => {
     const footerButtons = screen.getAllByRole('button');
-    expect(footerButtons.length).toBe(4);
+    expect(footerButtons.length).toBe(5);
   });
 });

@@ -2,10 +2,21 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import MainContent from '../../../../src/components/Home/MainContent';
+import { TweetsShape } from '../../../../src/pages/home';
 
 describe('Test MainContent component', () => {
+  const tweetMock: TweetsShape = {
+    tweet: 'a great tweet',
+    id: 2,
+    User: {
+      id: 12,
+      name: 'Lucas',
+      img: '',
+    },
+  };
+
   beforeEach(() => {
-    render(<MainContent />);
+    render(<MainContent tweets={tweetMock} />);
   });
 
   it('Main content must have profile picture', () => {
@@ -16,13 +27,6 @@ describe('Test MainContent component', () => {
   it('Main content must have user name', () => {
     const userName = screen.getByRole('heading');
     expect(userName).toBeInTheDocument();
-  });
-
-  it('Main content must have a edit tweet button options', () => {
-    const dotsOptionButton = screen.getByRole('button', {
-      name: /dots-option-button/i,
-    });
-    expect(dotsOptionButton).toBeInTheDocument();
   });
 
   it('Main content must have a comment tweet button', () => {
@@ -52,12 +56,5 @@ describe('Test MainContent component', () => {
   it('Main content must have a tweet paragraph', () => {
     const tweetBox = screen.getByRole('paragraph');
     expect(tweetBox).toBeInTheDocument();
-  });
-
-  it('Main content must have a create tweet button', () => {
-    const createTweetButton = screen.getByRole('button', {
-      name: /create-tweet-button/i,
-    });
-    expect(createTweetButton).toBeInTheDocument();
   });
 });

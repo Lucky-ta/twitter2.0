@@ -9,8 +9,11 @@ export const TweetCardPageContainer = styled.div`
     height: 100vh;
 `;
 
-export const LeftArrowButton = styled.div`
+export const LeftArrowButton = styled.button`
     font-size: 1.6em;
+    background: none;
+    border: none;
+    color: white;
 
     &&:hover {
         cursor: pointer;
