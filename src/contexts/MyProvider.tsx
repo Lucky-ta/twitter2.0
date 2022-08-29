@@ -20,6 +20,13 @@ function MyProvider({ children }: MyProviderPropsShape) {
 
   useEffect(() => {
     const storagedUserToken = localStorage.getItem('userToken');
+    if (!storagedUserToken) {
+      localStorage.setItem('userToken', '');
+    }
+  });
+
+  useEffect(() => {
+    const storagedUserToken = localStorage.getItem('userToken');
     if (storagedUserToken) {
       try {
         const authUser: any = isAuthenticated(storagedUserToken);
