@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import {
   FooterSpacing,
   HeaderSpacing,
@@ -12,8 +13,8 @@ import MyContext from '../contexts/MyContext';
 import { getAllTweets } from '../services/tweetApi';
 import { GlobalPageContainer } from '../styles/globalContainer';
 import myAccount from '../services/myAccountMock/myAccount';
-import ErrorPage from './error';
 import TweetCard from '../components/Tweet/TweetCard';
+import { redirectToErrorPage } from '../utils/redirectFunctions';
 
 export type TweetsShape = {
   tweet: string;
@@ -30,39 +31,43 @@ export interface MainPropsShape {
 }
 
 function Main({ data }: MainPropsShape) {
+  const router = useRouter();
   const { isValidUser } = useContext(MyContext);
   const [visible, setVisible] = useState(7);
   const showMoreTweets = () => {
     setVisible(data.length);
   };
 
-  if (isValidUser) {
-    return (
-      <GlobalPageContainer>
-        <Header title="Página Inicial" />
-        <HeaderSpacing />
-        <MainContentHomeContainer>
-          <TweetCard />
-          { myAccount.map((tweet) => (<MainContent tweets={tweet} />)) }
-          {data
-            .reverse()
-            .slice(0, visible)
-            .map((tweet) => (
-              <MainContent tweets={tweet} />
-            ))}
+  useEffect(() => {
+    if (!isValidUser) {
+      redirectToErrorPage(router);
+    }
+  }, []);
 
-        </MainContentHomeContainer>
-        {data.length > visible && (
-          <ShowMoreButton onClick={showMoreTweets} type="button">
-            mostrar mais
-          </ShowMoreButton>
-        )}
-        <FooterSpacing />
-        <Footer />
-      </GlobalPageContainer>
-    );
-  }
-  return <ErrorPage />;
+  return (
+    <GlobalPageContainer>
+      <Header title="Página Inicial" />
+      <HeaderSpacing />
+      <MainContentHomeContainer>
+        <TweetCard />
+        { myAccount.map((tweet) => (<MainContent tweets={tweet} />)) }
+        {data
+          .reverse()
+          .slice(0, visible)
+          .map((tweet) => (
+            <MainContent tweets={tweet} />
+          ))}
+
+      </MainContentHomeContainer>
+      {data.length > visible && (
+      <ShowMoreButton onClick={showMoreTweets} type="button">
+        mostrar mais
+      </ShowMoreButton>
+      )}
+      <FooterSpacing />
+      <Footer />
+    </GlobalPageContainer>
+  );
 }
 
 export async function getServerSideProps() {
