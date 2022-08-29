@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import {
   FooterSpacing,
   HeaderSpacing,
@@ -9,12 +8,10 @@ import {
 import Footer from '../components/Home/Footer';
 import Header from '../components/Home/Header';
 import MainContent from '../components/Home/MainContent';
-import MyContext from '../contexts/MyContext';
 import { getAllTweets } from '../services/tweetApi';
 import { GlobalPageContainer } from '../styles/globalContainer';
 import myAccount from '../services/myAccountMock/myAccount';
 import TweetCard from '../components/Tweet/TweetCard';
-import { redirectToErrorPage } from '../utils/redirectFunctions';
 
 export type TweetsShape = {
   tweet: string;
@@ -31,18 +28,10 @@ export interface MainPropsShape {
 }
 
 function Main({ data }: MainPropsShape) {
-  const router = useRouter();
-  const { isValidUser } = useContext(MyContext);
   const [visible, setVisible] = useState(7);
   const showMoreTweets = () => {
     setVisible(data.length);
   };
-
-  useEffect(() => {
-    if (!isValidUser) {
-      redirectToErrorPage(router);
-    }
-  }, []);
 
   return (
     <GlobalPageContainer>

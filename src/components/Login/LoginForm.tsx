@@ -2,7 +2,10 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import FormButtonsContainer from '.';
 import { signInUser, UserCredentialsShape } from '../../services/userApi';
-import { redirectToHomePage, redirectToSignUpPage } from '../../utils/redirectFunctions';
+import {
+  redirectToHomePage,
+  redirectToSignUpPage,
+} from '../../utils/redirectFunctions';
 import {
   SignUpComponentButton,
   SignUpComponentContainer,
@@ -15,6 +18,7 @@ import {
 
 function LoginForm() {
   const router = useRouter();
+  const [isRender, setIsRender] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
 
   const [credentials, setCredentials] = useState<UserCredentialsShape>();
@@ -26,16 +30,21 @@ function LoginForm() {
   };
 
   const userLogin = async (userCredentials: UserCredentialsShape) => {
+    setIsRender(false);
     setErrorMessage('');
     const response = await signInUser(userCredentials);
-    if (typeof response === 'string') {
+    if (response.message) {
+      setIsRender(true);
+      setErrorMessage('Usuário inválido');
+    } else {
       localStorage.setItem('userToken', response);
-      return redirectToHomePage(router);
+
+      setIsRender(true);
+      redirectToHomePage(router);
     }
-    return setErrorMessage('Usuário inválido');
   };
 
-  return (
+  return isRender ? (
     <SignUpComponentContainer>
       <SignUpComponentTitle>Entrar no Twitter</SignUpComponentTitle>
       <SignUpComponentForm>
@@ -70,11 +79,16 @@ function LoginForm() {
       </SignUpComponentForm>
       <SignUpComponentLinkContainer>
         <p>Não tem uma conta?</p>
-        <SignUpComponentLink type="button" onClick={() => redirectToSignUpPage(router)}>
+        <SignUpComponentLink
+          type="button"
+          onClick={() => redirectToSignUpPage(router)}
+        >
           Inscreva-se
         </SignUpComponentLink>
       </SignUpComponentLinkContainer>
     </SignUpComponentContainer>
+  ) : (
+    <h2>Carregando...</h2>
   );
 }
 
