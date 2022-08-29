@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken';
-import SECRET from './secret';
+
+require('dotenv').config();
 
 const isAuthenticated = (token: string) => {
-  const validate = jwt.verify(token, SECRET);
+  const validate = jwt.verify(token, process.env.SECRET);
   return validate;
 };
 
