@@ -3,6 +3,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { FiShare } from 'react-icons/fi';
 import { BsThreeDots } from 'react-icons/bs';
 import { FaRegComment, FaRetweet } from 'react-icons/fa';
+import { useRouter } from 'next/router';
 import ProfilePicture from '../../public/icons/blank-profile-picture.png';
 import {
   MainContentButtons,
@@ -14,12 +15,14 @@ import {
 } from '.';
 import { TweetsShape } from '../../pages/home';
 import MenuOptions from '../MenuOptions/MenuOptions';
+import { redirectToProfilePage } from '../../utils/redirectFunctions';
 
 export interface MainContentPropsShape {
   tweets: TweetsShape;
 }
 
 function MainContent({ tweets }: MainContentPropsShape) {
+  const router = useRouter();
   const validateCurrentPath = (): boolean => {
     const currentPath = window.location.pathname;
     const validate = currentPath === '/userProfile';
@@ -35,6 +38,7 @@ function MainContent({ tweets }: MainContentPropsShape) {
     <MainContentContainer>
       <MainContentHeader>
         <UserProfilePicture
+          onClick={() => redirectToProfilePage(router)}
           alt="main_profile_picture"
           tweetProfilePicture
           src={tweets.User.img ? tweets.User.img : ProfilePicture.src}

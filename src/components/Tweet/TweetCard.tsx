@@ -20,7 +20,7 @@ import {
   TweetVisiblityOptionContainer,
 } from '.';
 import { createTweet } from '../../services/tweetApi';
-import { redirectToHomePage } from '../../utils/redirectFunctions';
+import { redirectToHomePage, redirectToProfilePage } from '../../utils/redirectFunctions';
 
 function TweetCard() {
   const userToken = localStorage.getItem('userToken');
@@ -47,6 +47,7 @@ function TweetCard() {
       </LeftArrowButton>
       <TweetContainer>
         <UserProfilePicture
+          onClick={() => redirectToProfilePage(router)}
           alt="main_profile_picture"
           tweetProfilePicture
           src={ProfilePicture.src}

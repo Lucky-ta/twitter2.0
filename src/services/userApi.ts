@@ -29,4 +29,15 @@ const signInUser = async (userCredentials: UserCredentialsShape) => {
   }
 };
 
-export { signUpUser, signInUser };
+const deleteUser = async (userId: number, userToken: string) => {
+  try {
+    const result = await Api.delete(`/user/exclude/${userId}`, {
+      headers: { Authorization: userToken },
+    });
+    return result.data;
+  } catch (e: any) {
+    return { message: e.message };
+  }
+};
+
+export { signUpUser, signInUser, deleteUser };
