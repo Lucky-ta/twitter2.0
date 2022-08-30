@@ -3,8 +3,6 @@ import { jwtVerify } from 'jose';
 
 export default async function middleware(req: NextRequest) {
   const jwt = req.cookies.get('userToken');
-  console.log(jwt);
-
   const { pathname, origin } = req.nextUrl;
 
   if (pathname.includes('/home')) {
@@ -23,5 +21,5 @@ export default async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: '/home',
+  matcher: ['/home', '/compose/tweet', '/userProfile'],
 };

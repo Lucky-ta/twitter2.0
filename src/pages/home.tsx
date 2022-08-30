@@ -41,19 +41,24 @@ function Main({ data, USER_TOKEN }: MainPropsShape) {
       <HeaderSpacing />
       <MainContentHomeContainer>
         <TweetCard USER_TOKEN={USER_TOKEN} />
-        { myAccount.map((tweet) => (<MainContent tweets={tweet} />)) }
+        {myAccount.map((tweet) => (
+          <MainContent USER_TOKEN={USER_TOKEN} tweets={tweet} />
+        ))}
         {data
           .reverse()
           .slice(0, visible)
           .map((tweet) => (
-            <MainContent key={tweet.id} tweets={tweet} />
+            <MainContent
+              USER_TOKEN={USER_TOKEN}
+              key={tweet.id}
+              tweets={tweet}
+            />
           ))}
-
       </MainContentHomeContainer>
       {data.length > visible && (
-      <ShowMoreButton onClick={showMoreTweets} type="button">
-        mostrar mais
-      </ShowMoreButton>
+        <ShowMoreButton onClick={showMoreTweets} type="button">
+          mostrar mais
+        </ShowMoreButton>
       )}
       <FooterSpacing />
       <Footer />

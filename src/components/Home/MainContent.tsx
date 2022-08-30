@@ -4,6 +4,7 @@ import { FiShare } from 'react-icons/fi';
 import { BsThreeDots } from 'react-icons/bs';
 import { FaRegComment, FaRetweet } from 'react-icons/fa';
 import { useRouter } from 'next/router';
+import { parseCookies } from 'nookies';
 import ProfilePicture from '../../public/icons/blank-profile-picture.png';
 import {
   MainContentButtons,
@@ -19,9 +20,10 @@ import { redirectToProfilePage } from '../../utils/redirectFunctions';
 
 export interface MainContentPropsShape {
   tweets: TweetsShape;
+  USER_TOKEN: string;
 }
 
-function MainContent({ tweets }: MainContentPropsShape) {
+function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
   const router = useRouter();
   const validateCurrentPath = (): boolean => {
     const currentPath = router.pathname;
@@ -51,7 +53,9 @@ function MainContent({ tweets }: MainContentPropsShape) {
             aria-label="dots-option-button"
           >
             <BsThreeDots />
-            {isMenuVisible && <MenuOptions tweetId={tweets.id} />}
+            {isMenuVisible && (
+              <MenuOptions USER_TOKEN={USER_TOKEN} tweetId={tweets.id} />
+            )}
           </MainContentFilterButton>
         )}
       </MainContentHeader>
@@ -77,3 +81,13 @@ function MainContent({ tweets }: MainContentPropsShape) {
 }
 
 export default MainContent;
+
+export async function getServerSideProps(context) {
+  const cookies = parseCookies(context);
+
+  return {
+    props: {
+      USER_TOKEN: cookies.userToken,
+    },
+  };
+}

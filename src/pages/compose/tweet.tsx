@@ -1,20 +1,28 @@
-import React, { useContext } from 'react';
+import { parseCookies } from 'nookies';
+import React from 'react';
 import { TweetCardPageContainer } from '../../components/Tweet';
 import TweetCard from '../../components/Tweet/TweetCard';
-import MyContext from '../../contexts/MyContext';
-import ErrorPage from '../error';
 
-function Tweet() {
-  const { isValidUser } = useContext(MyContext);
+interface TweetPropsShape {
+  USER_TOKEN: string;
+}
 
-  if (isValidUser) {
-    return (
-      <TweetCardPageContainer>
-        <TweetCard />
-      </TweetCardPageContainer>
-    );
-  }
-  return <ErrorPage />;
+function Tweet({ USER_TOKEN }: TweetPropsShape) {
+  return (
+    <TweetCardPageContainer>
+      <TweetCard USER_TOKEN={USER_TOKEN} />
+    </TweetCardPageContainer>
+  );
 }
 
 export default Tweet;
+
+export async function getServerSideProps(context) {
+  const cookies = parseCookies(context);
+
+  return {
+    props: {
+      USER_TOKEN: cookies.userToken,
+    },
+  };
+}

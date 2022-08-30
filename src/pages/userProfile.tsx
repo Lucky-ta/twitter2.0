@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiFillGithub, AiOutlineLinkedin } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
+import { parseCookies } from 'nookies';
 import MainContent from '../components/Home/MainContent';
 import Footer from '../components/Home/Footer';
 import ProfileHeader from '../components/Profile/ProfileHeader';
-import MyContext from '../contexts/MyContext';
 import { getAllTweets } from '../services/tweetApi';
 import { MainPropsShape, TweetsShape } from './home';
 import { FooterSpacing, HeaderSpacing } from '../components/Home';
@@ -18,10 +18,18 @@ import {
   ProfileContainer,
   ProfileUserName,
 } from '../components/Profile';
+import getAuthUser from '../services/auth';
 
-function UserProfile({ data }: MainPropsShape) {
+function UserProfile({ data, USER_TOKEN }: MainPropsShape) {
   const [userTweets, setUserTweets] = useState([]);
-  const { userData } = useContext(MyContext);
+  const [userData, setUserData] = useState<any>({});
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const authUser = getAuthUser(USER_TOKEN);
+      setUserData(authUser);
+    }
+  }, []);
 
   useEffect(() => {
     const filteredUser = data.filter((tweet) => tweet.User.id === userData.id);
@@ -68,7 +76,7 @@ function UserProfile({ data }: MainPropsShape) {
         <p>Curtidas</p>
       </ProfileCategories>
       {userTweets.map((tweet) => (
-        <MainContent tweets={tweet} />
+        <MainContent USER_TOKEN={USER_TOKEN} tweets={tweet} />
       ))}
       <EditProfileButton
         type="button"
@@ -83,11 +91,14 @@ function UserProfile({ data }: MainPropsShape) {
 
 export default UserProfile;
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const cookies = parseCookies(context);
+
   const tweets: TweetsShape[] = await getAllTweets();
   return {
     props: {
       data: tweets,
+      USER_TOKEN: cookies.userToken,
     },
   };
 }

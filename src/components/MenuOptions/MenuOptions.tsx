@@ -6,17 +6,14 @@ import { redirectToHomePage } from '../../utils/redirectFunctions';
 
 interface MenuOptionsPropsShape {
   tweetId: number;
+  USER_TOKEN: string;
 }
 
-function MenuOptions({ tweetId }: MenuOptionsPropsShape) {
+function MenuOptions({ tweetId, USER_TOKEN }: MenuOptionsPropsShape) {
   const router = useRouter();
 
-  const { userToken } = document.cookie;
-  console.log(userToken, 'MENU OPTIONS');
-
-
   const excludeTweet = async () => {
-    const result = await deleteTweet(tweetId, userToken);
+    const result = await deleteTweet(tweetId, USER_TOKEN);
     if (result.message) {
       return window.alert('Não foi possível excluir o tweet.');
     }
