@@ -1,24 +1,27 @@
-import { NextResponse } from 'next/server';
-import { verify } from 'jsonwebtoken';
+import { NextRequest, NextResponse } from 'next/server';
+import { jwtVerify } from 'jose';
 
-export default function middleware(req) {
-  const { cookies } = req;
+export default async function middleware(req: NextRequest) {
+  const jwt = req.cookies.get('userToken');
+  console.log(jwt);
 
-  const jwt = cookies.OursiteJWT;
+  const { pathname, origin } = req.nextUrl;
 
-  const { url } = req;
-
-  if (url.includes('/home')) {
+  if (pathname.includes('/home')) {
     if (jwt === undefined) {
-      return NextResponse.redirect('/');
+      return NextResponse.redirect(`${origin}/`);
     }
     try {
-      verify(jwt, process.env.SECRET);
+      await jwtVerify(jwt, new TextEncoder().encode(process.env.SECRET));
       return NextResponse.next();
     } catch (e: any) {
-      return NextResponse.redirect('/error');
+      return NextResponse.redirect(`${origin}/error`);
     }
   }
 
   return NextResponse.next();
 }
+
+export const config = {
+  matcher: '/home',
+};

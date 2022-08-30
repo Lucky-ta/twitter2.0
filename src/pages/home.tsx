@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { parseCookies } from 'nookies';
 import {
   FooterSpacing,
   HeaderSpacing,
@@ -25,9 +26,10 @@ export type TweetsShape = {
 
 export interface MainPropsShape {
   data: TweetsShape[];
+  USER_TOKEN: string;
 }
 
-function Main({ data }: MainPropsShape) {
+function Main({ data, USER_TOKEN }: MainPropsShape) {
   const [visible, setVisible] = useState(7);
   const showMoreTweets = () => {
     setVisible(data.length);
@@ -38,13 +40,13 @@ function Main({ data }: MainPropsShape) {
       <Header title="Página Inicial" />
       <HeaderSpacing />
       <MainContentHomeContainer>
-        <TweetCard />
+        <TweetCard USER_TOKEN={USER_TOKEN} />
         { myAccount.map((tweet) => (<MainContent tweets={tweet} />)) }
         {data
           .reverse()
           .slice(0, visible)
           .map((tweet) => (
-            <MainContent tweets={tweet} />
+            <MainContent key={tweet.id} tweets={tweet} />
           ))}
 
       </MainContentHomeContainer>
@@ -59,11 +61,15 @@ function Main({ data }: MainPropsShape) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const cookies = parseCookies(context);
+
   const tweets: TweetsShape[] = await getAllTweets();
+
   return {
     props: {
       data: tweets,
+      USER_TOKEN: cookies.userToken,
     },
   };
 }

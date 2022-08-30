@@ -11,7 +11,10 @@ interface MenuOptionsPropsShape {
 function MenuOptions({ tweetId }: MenuOptionsPropsShape) {
   const router = useRouter();
 
-  const userToken = localStorage.getItem('userToken');
+  const { userToken } = document.cookie;
+  console.log(userToken, 'MENU OPTIONS');
+
+
   const excludeTweet = async () => {
     const result = await deleteTweet(tweetId, userToken);
     if (result.message) {

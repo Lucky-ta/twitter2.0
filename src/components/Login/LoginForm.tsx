@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { setCookie } from 'nookies';
 import React, { useState } from 'react';
 import FormButtonsContainer from '.';
 import { signInUser, UserCredentialsShape } from '../../services/userApi';
@@ -37,7 +38,10 @@ function LoginForm() {
       setIsRender(true);
       setErrorMessage('Usuário inválido');
     } else {
-      localStorage.setItem('userToken', response);
+      setCookie(null, 'userToken', response, {
+        maxAge: 86400 * 7,
+        path: '/',
+      });
 
       setIsRender(true);
       redirectToHomePage(router);

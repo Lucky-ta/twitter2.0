@@ -24,7 +24,7 @@ export interface MainContentPropsShape {
 function MainContent({ tweets }: MainContentPropsShape) {
   const router = useRouter();
   const validateCurrentPath = (): boolean => {
-    const currentPath = window.location.pathname;
+    const currentPath = router.pathname;
     const validate = currentPath === '/userProfile';
     return validate;
   };

@@ -25,14 +25,17 @@ import {
   redirectToProfilePage,
 } from '../../utils/redirectFunctions';
 
-function TweetCard() {
-  const userToken = localStorage.getItem('userToken');
+interface TweetCardPropsShape {
+  USER_TOKEN: string;
+}
+
+function TweetCard({ USER_TOKEN }: TweetCardPropsShape) {
   const [tweet, setTweet] = useState('');
 
   const router = useRouter();
 
   const postNewTweet = async () => {
-    const response = await createTweet(tweet, userToken);
+    const response = await createTweet(tweet, USER_TOKEN);
     if (response.id) {
       return redirectToHomePage(router);
     }

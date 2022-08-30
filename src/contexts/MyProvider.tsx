@@ -19,21 +19,16 @@ function MyProvider({ children }: MyProviderPropsShape) {
   };
 
   useEffect(() => {
-    const storagedUserToken = localStorage.getItem('userToken');
-    if (!storagedUserToken) {
-      localStorage.setItem('userToken', '');
-    }
-  });
-
-  useEffect(() => {
-    const storagedUserToken = localStorage.getItem('userToken');
-    if (storagedUserToken) {
-      try {
-        const authUser: any = isAuthenticated(storagedUserToken);
-        setUserData(authUser);
-        setIsValidUser(true);
-      } catch (e: any) {
-        setIsValidUser(false);
+    if (typeof window !== 'undefined') {
+      const storagedUserToken = document.cookie.userToken;
+      if (storagedUserToken) {
+        try {
+          const authUser: any = isAuthenticated(storagedUserToken);
+          setUserData(authUser);
+          setIsValidUser(true);
+        } catch (e: any) {
+          setIsValidUser(false);
+        }
       }
     }
   }, []);
