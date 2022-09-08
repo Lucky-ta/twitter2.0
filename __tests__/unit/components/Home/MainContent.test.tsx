@@ -1,6 +1,8 @@
 import React from 'react';
 import '@testing-library/jest-dom';
+import { createMemoryHistory } from 'history';
 import { render, screen } from '@testing-library/react';
+import { Router } from 'react-router-dom';
 import MainContent from '../../../../src/components/Home/MainContent';
 import { TweetsShape } from '../../../../src/pages/home';
 
@@ -16,7 +18,12 @@ describe('Test MainContent component', () => {
   };
 
   beforeEach(() => {
-    render(<MainContent tweets={tweetMock} />);
+    const history = createMemoryHistory();
+    render(
+      <Router location={history.location} navigator={history}>
+        <MainContent tweets={tweetMock} USER_TOKEN="0000-0000" />
+      </Router>,
+    );
   });
 
   it('Main content must have profile picture', () => {

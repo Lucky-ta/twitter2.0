@@ -3,7 +3,7 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { FiShare } from 'react-icons/fi';
 import { BsThreeDots } from 'react-icons/bs';
 import { FaRegComment, FaRetweet } from 'react-icons/fa';
-import { useRouter } from 'next/router';
+import { useLocation } from 'react-router-dom';
 import { parseCookies } from 'nookies';
 import ProfilePicture from '../../public/icons/blank-profile-picture.png';
 import {
@@ -24,7 +24,7 @@ export interface MainContentPropsShape {
 }
 
 function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
-  const router = useRouter();
+  const router = useLocation();
   const validateCurrentPath = (): boolean => {
     const currentPath = router.pathname;
     const validate = currentPath === '/userProfile';
