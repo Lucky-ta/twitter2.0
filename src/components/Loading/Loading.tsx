@@ -1,11 +1,8 @@
 import React from 'react';
+import LoadingComponent from '.';
 
 function Loading() {
-  return (
-    <div>
-      <h2>Carregando...</h2>
-    </div>
-  );
+  return <LoadingComponent>Carregando...</LoadingComponent>;
 }
 
 export default Loading;

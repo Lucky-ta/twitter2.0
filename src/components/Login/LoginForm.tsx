@@ -7,6 +7,7 @@ import {
   redirectToHomePage,
   redirectToSignUpPage,
 } from '../../utils/redirectFunctions';
+import Loading from '../Loading/Loading';
 import {
   SignUpComponentButton,
   SignUpComponentContainer,
@@ -92,7 +93,7 @@ function LoginForm() {
       </SignUpComponentLinkContainer>
     </SignUpComponentContainer>
   ) : (
-    <h2>Carregando...</h2>
+    <Loading />
   );
 }
 
