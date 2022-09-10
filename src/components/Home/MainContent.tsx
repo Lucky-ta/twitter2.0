@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { AiOutlineHeart } from 'react-icons/ai';
+import React, { useEffect, useState } from 'react';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { FiShare } from 'react-icons/fi';
 import { BsThreeDots } from 'react-icons/bs';
 import { FaRegComment, FaRetweet } from 'react-icons/fa';
@@ -13,6 +13,8 @@ import {
   MainContentFilterButton,
   MainContentHeader,
   UserProfilePicture,
+  TweetStatusCounter,
+  ButtonContentContainer,
 } from '.';
 import { TweetsShape } from '../../pages/home';
 import MenuOptions from '../MenuOptions/MenuOptions';
@@ -25,6 +27,8 @@ export interface MainContentPropsShape {
 }
 
 function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
+  const [isFavorite, setIsFavorite] = useState(false);
+
   const router = useRouter();
   const validateCurrentPath = (): boolean => {
     const currentPath = router.pathname;
@@ -45,6 +49,7 @@ function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
     const isTweetInStorage = currentStorage.some(
       (currentTweet: TweetsShape) => currentTweet.id === tweets.id,
     );
+    setIsFavorite(isTweetInStorage);
     return isTweetInStorage;
   };
 
@@ -70,11 +75,17 @@ function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
     const isStoraged = isTweetInStoraged();
     if (isStoraged) {
       await likeTweet(tweets.id, '-', USER_TOKEN);
+      setIsFavorite(false);
       return removeTweetFromStorage();
     }
     await likeTweet(tweets.id, '+', USER_TOKEN);
+    setIsFavorite(true);
     return addTweetAtStorage();
   };
+
+  useEffect(() => {
+    isTweetInStoraged();
+  }, [isFavorite]);
 
   return (
     <MainContentContainer>
@@ -114,8 +125,13 @@ function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
           type="button"
           aria-label="like-button"
         >
-          {tweets.likes}
-          <AiOutlineHeart />
+          <ButtonContentContainer>
+            { isFavorite
+              ? <AiFillHeart color="rgb(249, 24, 128)" />
+              : <AiOutlineHeart /> }
+            <TweetStatusCounter>{tweets.likes}</TweetStatusCounter>
+
+          </ButtonContentContainer>
         </MainContentButtons>
         <MainContentButtons type="button" aria-label="share-button">
           <FiShare />

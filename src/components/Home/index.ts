@@ -173,7 +173,7 @@ export const MainContentButtonsContainer = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding-top: 0.6em;
+    padding-top: 1em;
     padding-bottom: 0.6em;
 `;
 
@@ -182,6 +182,8 @@ export const MainContentButtons = styled.button`
     border: none;
     color: grey;
     font-size: 1.2em;
+    cursor: pointer;
+
 `;
 
 export const ShowMoreButton = styled.button`
@@ -207,4 +209,14 @@ export const MainContentHomeContainer = styled.div`
         height: 100%;
         padding-left: 6rem;
   }
+`;
+
+export const ButtonContentContainer = styled.div`
+    display: flex;
+    gap: 1em;
+    align-items: center;
+`;
+
+export const TweetStatusCounter = styled.span`
+    font-size: 0.7em;
 `;
