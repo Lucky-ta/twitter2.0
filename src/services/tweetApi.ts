@@ -31,4 +31,17 @@ const getAllTweets = async () => {
   }
 };
 
-export { createTweet, deleteTweet, getAllTweets };
+const likeTweet = async (tweetId: number, likeSign: string, userToken: string) => {
+  try {
+    const response = await Api.put(`/tweet/like/${tweetId}`, { likeSign }, {
+      headers: { Authorization: userToken },
+    });
+    return response.data;
+  } catch (e: any) {
+    return { message: e.message };
+  }
+};
+
+export {
+  createTweet, deleteTweet, getAllTweets, likeTweet,
+};

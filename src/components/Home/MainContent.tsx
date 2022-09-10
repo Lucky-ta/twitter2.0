@@ -17,6 +17,7 @@ import {
 import { TweetsShape } from '../../pages/home';
 import MenuOptions from '../MenuOptions/MenuOptions';
 import { redirectToProfilePage } from '../../utils/redirectFunctions';
+import { likeTweet } from '../../services/tweetApi';
 
 export interface MainContentPropsShape {
   tweets: TweetsShape;
@@ -34,6 +35,45 @@ function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
   const [isMenuVisible, setisMenuVisible] = useState(false);
   const showMenuOptions = () => {
     setisMenuVisible(!isMenuVisible);
+  };
+
+  const isTweetInStoraged = (): boolean => {
+    const currentStorage = JSON.parse(
+      localStorage.getItem('likedTweets'),
+    );
+
+    const isTweetInStorage = currentStorage.some(
+      (currentTweet: TweetsShape) => currentTweet.id === tweets.id,
+    );
+    return isTweetInStorage;
+  };
+
+  const addTweetAtStorage = () => {
+    const currentStorage = JSON.parse(localStorage.getItem('likedTweets'));
+    return localStorage.setItem(
+      'likedTweets',
+      JSON.stringify([...currentStorage, tweets]),
+    );
+  };
+
+  const removeTweetFromStorage = () => {
+    const currentStorage = JSON.parse(localStorage.getItem('likedTweets'));
+
+    const storageTweetIndex = currentStorage.findIndex(
+      ({ id }) => id === tweets.id,
+    );
+    currentStorage.splice(storageTweetIndex, 1);
+    localStorage.setItem('likedTweets', JSON.stringify(currentStorage));
+  };
+
+  const handleLikeTweet = async () => {
+    const isStoraged = isTweetInStoraged();
+    if (isStoraged) {
+      await likeTweet(tweets.id, '-', USER_TOKEN);
+      return removeTweetFromStorage();
+    }
+    await likeTweet(tweets.id, '+', USER_TOKEN);
+    return addTweetAtStorage();
   };
 
   return (
@@ -69,7 +109,12 @@ function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
         <MainContentButtons type="button" aria-label="retweet-button">
           <FaRetweet />
         </MainContentButtons>
-        <MainContentButtons type="button" aria-label="like-button">
+        <MainContentButtons
+          onClick={handleLikeTweet}
+          type="button"
+          aria-label="like-button"
+        >
+          {tweets.likes}
           <AiOutlineHeart />
         </MainContentButtons>
         <MainContentButtons type="button" aria-label="share-button">
