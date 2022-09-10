@@ -47,6 +47,7 @@ export const TweetButton = styled.button`
 
     position: absolute;
     right: 0;
+    cursor: pointer;
 
     @media(max-width: 500px) {
         top: 0;

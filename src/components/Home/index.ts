@@ -104,6 +104,8 @@ export const FooterButtons = styled.button`
     border: none;
     color: white;
     font-size: 1.6em;
+    cursor: pointer;
+
 `;
 
 export const MainContentContainer = styled.main`
