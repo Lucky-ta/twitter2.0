@@ -21,8 +21,29 @@ import {
 import getAuthUser from '../services/auth';
 
 function UserProfile({ data, USER_TOKEN }: MainPropsShape) {
+  const [tweetsCategory, setTweetsCategory] = useState('tweets');
+  const [storagedTweets, setStoragedTweets] = useState([]);
   const [userTweets, setUserTweets] = useState([]);
   const [userData, setUserData] = useState<any>({});
+
+  const renderMainContent = (mainContent: TweetsShape[]) => mainContent.map((tweet) => (
+    <MainContent USER_TOKEN={USER_TOKEN} tweets={tweet} />
+  ));
+
+  const renderTweetsByCategory = () => {
+    switch (tweetsCategory) {
+      case 'tweets':
+        return renderMainContent(userTweets);
+      case 'liked':
+        return renderMainContent(storagedTweets);
+      default:
+        return renderMainContent(userTweets);
+    }
+  };
+
+  const hanldeCategories = ({ target }: any) => {
+    setTweetsCategory(target.id);
+  };
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -35,6 +56,11 @@ function UserProfile({ data, USER_TOKEN }: MainPropsShape) {
     const filteredUser = data.filter((tweet) => tweet.User.id === userData.id);
     setUserTweets(filteredUser);
   }, [userData]);
+
+  useEffect(() => {
+    const likedTweets = JSON.parse(localStorage.getItem('likedTweets'));
+    setStoragedTweets(likedTweets);
+  }, []);
 
   const redirectContact = (contactLink: string) => {
     window.location.href = contactLink;
@@ -73,16 +99,12 @@ function UserProfile({ data, USER_TOKEN }: MainPropsShape) {
         <ProfileCategoriesOptions>Tweets</ProfileCategoriesOptions>
         <p>Tweets e respostas</p>
         <p>Mídia</p>
-        <p>Curtidas</p>
+        <button type="button" id="liked" onClick={(e) => hanldeCategories(e)}>
+          Curtidas
+        </button>
       </ProfileCategories>
-      {userTweets.map((tweet) => (
-        <MainContent USER_TOKEN={USER_TOKEN} tweets={tweet} />
-      ))}
-      <EditProfileButton
-        type="button"
-      >
-        Editar perfil
-      </EditProfileButton>
+      {renderTweetsByCategory()}
+      <EditProfileButton type="button">Editar perfil</EditProfileButton>
       <Footer />
       <FooterSpacing />
     </ProfileContainer>
