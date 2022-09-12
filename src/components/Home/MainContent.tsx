@@ -6,6 +6,7 @@ import { FaRegComment, FaRetweet } from 'react-icons/fa';
 import { parseCookies } from 'nookies';
 import { useRouter } from 'next/router';
 import ProfilePicture from '../../public/icons/blank-profile-picture.png';
+import getAuthUser from '../../services/auth';
 import {
   MainContentButtons,
   MainContentButtonsContainer,
@@ -28,13 +29,7 @@ export interface MainContentPropsShape {
 
 function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
   const [isFavorite, setIsFavorite] = useState(false);
-
   const router = useRouter();
-  const validateCurrentPath = (): boolean => {
-    const currentPath = router.pathname;
-    const validate = currentPath === '/userProfile';
-    return validate;
-  };
 
   const [isMenuVisible, setisMenuVisible] = useState(false);
   const showMenuOptions = () => {
@@ -83,6 +78,12 @@ function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
     return addTweetAtStorage();
   };
 
+  const isThreeDotsOptionsRender = () => {
+    const validateToken = getAuthUser(USER_TOKEN);
+    const isValidUser = validateToken.id === tweets.User.id;
+    return isValidUser;
+  };
+
   useEffect(() => {
     isTweetInStoraged();
   }, [isFavorite]);
@@ -97,7 +98,7 @@ function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
           src={tweets.User.img ? tweets.User.img : ProfilePicture.src}
         />
         <h2>{tweets.User.name}</h2>
-        {validateCurrentPath() && (
+        {isThreeDotsOptionsRender() && (
           <MainContentFilterButton
             onClick={showMenuOptions}
             type="button"
