@@ -48,34 +48,8 @@ function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
     return isTweetInStorage;
   };
 
-  const addTweetAtStorage = () => {
-    const currentStorage = JSON.parse(localStorage.getItem('likedTweets'));
-    return localStorage.setItem(
-      'likedTweets',
-      JSON.stringify([...currentStorage, tweets]),
-    );
-  };
-
-  const removeTweetFromStorage = () => {
-    const currentStorage = JSON.parse(localStorage.getItem('likedTweets'));
-
-    const storageTweetIndex = currentStorage.findIndex(
-      ({ id }) => id === tweets.id,
-    );
-    currentStorage.splice(storageTweetIndex, 1);
-    localStorage.setItem('likedTweets', JSON.stringify(currentStorage));
-  };
-
   const handleLikeTweet = async () => {
-    const isStoraged = isTweetInStoraged();
-    if (isStoraged) {
-      await likeTweet(tweets.id, '-', USER_TOKEN);
-      setIsFavorite(false);
-      return removeTweetFromStorage();
-    }
-    await likeTweet(tweets.id, '+', USER_TOKEN);
-    setIsFavorite(true);
-    return addTweetAtStorage();
+
   };
 
   const isThreeDotsOptionsRender = () => {
