@@ -41,7 +41,7 @@ function UserProfile({ data, USER_TOKEN }: MainPropsShape) {
     }
   };
 
-  const hanldeCategories = ({ target }: any) => {
+  const handleCategories = ({ target }: any) => {
     setTweetsCategory(target.id);
   };
 
@@ -96,12 +96,38 @@ function UserProfile({ data, USER_TOKEN }: MainPropsShape) {
         </ContactButton>
       </ProfileContactContainer>
       <ProfileCategories>
-        <ProfileCategoriesOptions>Tweets</ProfileCategoriesOptions>
-        <p>Tweets e respostas</p>
-        <p>Mídia</p>
-        <button type="button" id="liked" onClick={(e) => hanldeCategories(e)}>
+        <ProfileCategoriesOptions
+          mainCategory={tweetsCategory === 'tweets'}
+          type="button"
+          id="tweets"
+          onClick={(e) => handleCategories(e)}
+        >
+          Tweets
+        </ProfileCategoriesOptions>
+        <ProfileCategoriesOptions
+          mainCategory={tweetsCategory === 'response'}
+          type="button"
+          id="response"
+          onClick={(e) => handleCategories(e)}
+        >
+          Tweets e respostas
+        </ProfileCategoriesOptions>
+        <ProfileCategoriesOptions
+          mainCategory={tweetsCategory === 'media'}
+          type="button"
+          id="media"
+          onClick={(e) => handleCategories(e)}
+        >
+          Mídia
+        </ProfileCategoriesOptions>
+        <ProfileCategoriesOptions
+          mainCategory={tweetsCategory === 'liked'}
+          type="button"
+          id="liked"
+          onClick={(e) => handleCategories(e)}
+        >
           Curtidas
-        </button>
+        </ProfileCategoriesOptions>
       </ProfileCategories>
       {renderTweetsByCategory()}
       <EditProfileButton type="button">Editar perfil</EditProfileButton>

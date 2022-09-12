@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const ProfileHeaderContainer = styled.div`
     display: flex;
@@ -103,13 +103,28 @@ export const ProfileCategories = styled.div`
     font-weight: 600;
 `;
 
-export const ProfileCategoriesOptions = styled.p`
-    border-bottom: 4px solid rgb(29, 155, 240);
-    height: 2.4em;
+interface ProfileCategoriesOptionsPropsShape {
+    mainCategory?: boolean;
+}
 
-    &&:hover {
-        cursor: pointer;
-    }
+export const ProfileCategoriesOptions = styled.button<ProfileCategoriesOptionsPropsShape>`
+    border: none;
+    background: none;
+    color: white;
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+
+    ${({ mainCategory }) => mainCategory && css`
+        border-bottom: 4px solid rgb(29, 155, 240);
+        height: 2.4em;
+    `}
+
+    &&:focus {
+        border-bottom: 4px solid rgb(29, 155, 240);
+        height: 2.4em;
+}
+
 `;
 
 export const ProfileContactContainer = styled.div`
