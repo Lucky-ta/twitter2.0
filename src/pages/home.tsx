@@ -43,7 +43,10 @@ function Main({ data, USER_TOKEN }: MainPropsShape) {
       <MainContentHomeContainer>
         <TweetCard USER_TOKEN={USER_TOKEN} />
         {myAccount.map((tweet) => (
-          <MainContent USER_TOKEN={USER_TOKEN} tweets={tweet} />
+          <MainContent
+            USER_TOKEN={USER_TOKEN}
+            tweets={tweet}
+          />
         ))}
         {data
           .reverse()
@@ -68,8 +71,7 @@ function Main({ data, USER_TOKEN }: MainPropsShape) {
 }
 
 export async function getServerSideProps(context) {
-  const cookies = parseCookies(context);
-
+  const cookies: any = parseCookies(context);
   const tweets: TweetsShape[] = await getAllTweets();
 
   return {

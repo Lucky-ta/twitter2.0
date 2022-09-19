@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { FiShare } from 'react-icons/fi';
 import { BsThreeDots } from 'react-icons/bs';
 import { FaRegComment, FaRetweet } from 'react-icons/fa';
-import { parseCookies } from 'nookies';
 import { useRouter } from 'next/router';
 import ProfilePicture from '../../public/icons/blank-profile-picture.png';
 import getAuthUser from '../../services/auth';
@@ -28,28 +27,11 @@ export interface MainContentPropsShape {
 }
 
 function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
-  const [isFavorite, setIsFavorite] = useState(false);
   const router = useRouter();
 
   const [isMenuVisible, setisMenuVisible] = useState(false);
   const showMenuOptions = () => {
     setisMenuVisible(!isMenuVisible);
-  };
-
-  const isTweetInStoraged = (): boolean => {
-    const currentStorage = JSON.parse(
-      localStorage.getItem('likedTweets'),
-    );
-
-    const isTweetInStorage = currentStorage.some(
-      (currentTweet: TweetsShape) => currentTweet.id === tweets.id,
-    );
-    setIsFavorite(isTweetInStorage);
-    return isTweetInStorage;
-  };
-
-  const handleLikeTweet = async () => {
-
   };
 
   const isThreeDotsOptionsRender = () => {
@@ -58,9 +40,9 @@ function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
     return isValidUser;
   };
 
-  useEffect(() => {
-    isTweetInStoraged();
-  }, [isFavorite]);
+  const handleLikeTweet = async () => {
+    console.log(tweets);
+  };
 
   return (
     <MainContentContainer>
@@ -69,7 +51,7 @@ function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
           onClick={() => redirectToProfilePage(router)}
           alt="main_profile_picture"
           tweetProfilePicture
-          src={tweets.User.img ? tweets.User.img : ProfilePicture.src}
+          src={ProfilePicture.src}
         />
         <h2>{tweets.User.name}</h2>
         {isThreeDotsOptionsRender() && (
@@ -101,7 +83,7 @@ function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
           aria-label="like-button"
         >
           <ButtonContentContainer>
-            { isFavorite
+            { true
               ? <AiFillHeart color="rgb(249, 24, 128)" />
               : <AiOutlineHeart /> }
             <TweetStatusCounter>{tweets.likes}</TweetStatusCounter>
@@ -117,13 +99,3 @@ function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
 }
 
 export default MainContent;
-
-export async function getServerSideProps(context) {
-  const cookies = parseCookies(context);
-
-  return {
-    props: {
-      USER_TOKEN: cookies.userToken,
-    },
-  };
-}

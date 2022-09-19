@@ -29,42 +29,20 @@ const signInUser = async (userCredentials: UserCredentialsShape) => {
   }
 };
 
-const addLikedTweet = async (userId: number, tweetId: number, userToken: string) => {
-  try {
-    const result = await Api.post(`/likedTweets/${userId}/${tweetId}`, {
-      headers: { Authorization: userToken },
-    });
-    return result.data;
-  } catch (e: any) {
-    return { message: e.message };
-  }
-};
-
-const removeLikedTweet = async (userId: number, tweetId: number, userToken: string) => {
-  try {
-    const result = await Api.delete(`/likedTweets/${userId}/${tweetId}`, {
-      headers: { Authorization: userToken },
-    });
-    return result.data;
-  } catch (e: any) {
-    return { message: e.message };
-  }
-};
-
-const getLikedTweetsByUserId = async (userId: number, userToken: string) => {
-  try {
-    const result = await Api.delete(`/likedTweets/${userId}`, {
-      headers: { Authorization: userToken },
-    });
-    return result.data;
-  } catch (e: any) {
-    return { message: e.message };
-  }
-};
-
 const deleteUser = async (userId: number, userToken: string) => {
   try {
     const result = await Api.delete(`/user/exclude/${userId}`, {
+      headers: { Authorization: userToken },
+    });
+    return result.data;
+  } catch (e: any) {
+    return { message: e.message };
+  }
+};
+
+const editUserName = async (userId: number, userToken: string, name: string) => {
+  try {
+    const result = await Api.put('/user/edit/:id', name, {
       headers: { Authorization: userToken },
     });
     return result.data;
@@ -77,7 +55,5 @@ export {
   signUpUser,
   signInUser,
   deleteUser,
-  addLikedTweet,
-  removeLikedTweet,
-  getLikedTweetsByUserId,
+  editUserName,
 };

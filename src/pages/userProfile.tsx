@@ -6,7 +6,7 @@ import MainContent from '../components/Home/MainContent';
 import Footer from '../components/Home/Footer';
 import ProfileHeader from '../components/Profile/ProfileHeader';
 import { getAllTweets } from '../services/tweetApi';
-import { MainPropsShape, TweetsShape } from './home';
+import { TweetsShape } from './home';
 import { FooterSpacing, HeaderSpacing } from '../components/Home';
 import ProfileInfo from '../components/Profile/ProfileInfo';
 import {
@@ -20,9 +20,21 @@ import {
 } from '../components/Profile';
 import getAuthUser from '../services/auth';
 
-function UserProfile({ data, USER_TOKEN }: MainPropsShape) {
+export type LikedTweetsShape = {
+  id: number;
+  userId: number;
+  tweetId: number;
+  Tweet: { tweet: string };
+};
+
+interface UserProfilePropsShape {
+  data: TweetsShape[];
+  USER_TOKEN: string;
+  likedTweets: LikedTweetsShape;
+}
+
+function UserProfile({ data, USER_TOKEN, likedTweets }: UserProfilePropsShape) {
   const [tweetsCategory, setTweetsCategory] = useState('tweets');
-  const [storagedTweets, setStoragedTweets] = useState([]);
   const [userTweets, setUserTweets] = useState([]);
   const [userData, setUserData] = useState<any>({});
 
@@ -35,7 +47,7 @@ function UserProfile({ data, USER_TOKEN }: MainPropsShape) {
       case 'tweets':
         return renderMainContent(userTweets);
       case 'liked':
-        return renderMainContent(storagedTweets);
+        return renderMainContent(likedTweets);
       default:
         return renderMainContent(userTweets);
     }
@@ -58,8 +70,7 @@ function UserProfile({ data, USER_TOKEN }: MainPropsShape) {
   }, [userData]);
 
   useEffect(() => {
-    const likedTweets = JSON.parse(localStorage.getItem('likedTweets'));
-    setStoragedTweets(likedTweets);
+
   }, []);
 
   const redirectContact = (contactLink: string) => {
@@ -140,13 +151,17 @@ function UserProfile({ data, USER_TOKEN }: MainPropsShape) {
 export default UserProfile;
 
 export async function getServerSideProps(context) {
-  const cookies = parseCookies(context);
+  const cookies: any = parseCookies(context);
 
   const tweets: TweetsShape[] = await getAllTweets();
+  const userData = getAuthUser(cookies.userToken);
+
+
   return {
     props: {
       data: tweets,
       USER_TOKEN: cookies.userToken,
+      likedTweets,
     },
   };
 }
