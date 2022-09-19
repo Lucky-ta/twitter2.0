@@ -42,7 +42,7 @@ const deleteUser = async (userId: number, userToken: string) => {
 
 const editUserName = async (userId: number, userToken: string, name: string) => {
   try {
-    const result = await Api.put('/user/edit/:id', name, {
+    const result = await Api.put(`/user/edit/${userId}`, name, {
       headers: { Authorization: userToken },
     });
     return result.data;
