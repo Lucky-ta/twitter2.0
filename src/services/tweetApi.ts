@@ -1,8 +1,8 @@
 import Api from './Api';
 
-const createTweet = async (tweet: string, userToken: string) => {
+const createTweet = async (tweet: string, userToken: string, userId: number) => {
   try {
-    const response = await Api.post('/tweet/create', { tweet }, {
+    const response = await Api.post(`/tweet/create/${userId}`, { tweet }, {
       headers: { Authorization: userToken },
     });
     return response.data;
@@ -11,9 +11,9 @@ const createTweet = async (tweet: string, userToken: string) => {
   }
 };
 
-const deleteTweet = async (tweetId: number, userToken: string) => {
+const deleteTweet = async (tweetId: number, userToken: string, userId: number) => {
   try {
-    const response = await Api.delete(`/tweet/${tweetId}`, {
+    const response = await Api.delete(`/tweet/${tweetId}/${userId}`, {
       headers: { Authorization: userToken },
     });
     return response.data;
@@ -31,9 +31,20 @@ const getAllTweets = async () => {
   }
 };
 
-const likeTweet = async (tweetId: number, likeSign: string, userToken: string) => {
+const likeTweet = async (userId: number, tweetId: number, userToken: string) => {
   try {
-    const response = await Api.put(`/tweet/like/${tweetId}`, { likeSign }, {
+    const response = await Api.post(`/tweet/like/${userId}/${tweetId}`, {
+      headers: { Authorization: userToken },
+    });
+    return response.data;
+  } catch (e: any) {
+    return { message: e.message };
+  }
+};
+
+const getAllLikedTweets = async (userId: number, userToken: string) => {
+  try {
+    const response = await Api.post(`/tweet/liked/${userId}`, {
       headers: { Authorization: userToken },
     });
     return response.data;
@@ -43,5 +54,9 @@ const likeTweet = async (tweetId: number, likeSign: string, userToken: string) =
 };
 
 export {
-  createTweet, deleteTweet, getAllTweets, likeTweet,
+  createTweet,
+  deleteTweet,
+  getAllTweets,
+  likeTweet,
+  getAllLikedTweets,
 };
