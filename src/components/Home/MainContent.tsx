@@ -67,7 +67,7 @@ function MainContent({
           >
             <BsThreeDots />
             {isMenuVisible && (
-              <MenuOptions USER_TOKEN={userData.USER_TOKEN} tweetId={tweet.id} />
+              <MenuOptions userData={userData} tweetId={tweet.id} />
             )}
           </MainContentFilterButton>
         )}
