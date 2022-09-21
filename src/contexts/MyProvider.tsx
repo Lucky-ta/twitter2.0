@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import MyContext from './MyContext';
 
 interface MyProviderPropsShape {
@@ -13,15 +13,6 @@ function MyProvider({ children }: MyProviderPropsShape) {
     userToken,
     setUserToken,
   };
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storagedLikedTweets = localStorage.getItem('likedTweets');
-      if (!storagedLikedTweets) {
-        localStorage.setItem('likedTweets', JSON.stringify([]));
-      }
-    }
-  }, []);
 
   return <MyContext.Provider value={datas}>{children}</MyContext.Provider>;
 }

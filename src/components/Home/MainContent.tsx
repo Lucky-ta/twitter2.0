@@ -20,13 +20,18 @@ import { TweetsShape } from '../../pages/home';
 import MenuOptions from '../MenuOptions/MenuOptions';
 import { redirectToProfilePage } from '../../utils/redirectFunctions';
 import { likeTweet } from '../../services/tweetApi';
+import { UserDataShape } from '../../pages/userProfile';
 
 export interface MainContentPropsShape {
-  tweets: TweetsShape;
-  USER_TOKEN: string;
+  tweet: TweetsShape;
+  userData: UserDataShape;
+  likedTweets: TweetsShape[];
+  profilePicture?: string;
 }
 
-function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
+function MainContent({
+  tweet, userData, likedTweets, profilePicture,
+}: MainContentPropsShape) {
   const router = useRouter();
 
   const [isMenuVisible, setisMenuVisible] = useState(false);
@@ -35,13 +40,13 @@ function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
   };
 
   const isThreeDotsOptionsRender = () => {
-    const validateToken = getAuthUser(USER_TOKEN);
-    const isValidUser = validateToken.id === tweets.User.id;
+    const validateToken = getAuthUser(userData.USER_TOKEN);
+    const isValidUser = validateToken.id === tweet.User.id;
     return isValidUser;
   };
 
   const handleLikeTweet = async () => {
-    console.log(tweets);
+    await likeTweet(userData.userId, tweet.id, userData.USER_TOKEN);
   };
 
   return (
@@ -51,9 +56,9 @@ function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
           onClick={() => redirectToProfilePage(router)}
           alt="main_profile_picture"
           tweetProfilePicture
-          src={ProfilePicture.src}
+          src={profilePicture || ProfilePicture.src}
         />
-        <h2>{tweets.User.name}</h2>
+        <h2>{tweet.User.name}</h2>
         {isThreeDotsOptionsRender() && (
           <MainContentFilterButton
             onClick={showMenuOptions}
@@ -62,13 +67,13 @@ function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
           >
             <BsThreeDots />
             {isMenuVisible && (
-              <MenuOptions USER_TOKEN={USER_TOKEN} tweetId={tweets.id} />
+              <MenuOptions USER_TOKEN={userData.USER_TOKEN} tweetId={tweet.id} />
             )}
           </MainContentFilterButton>
         )}
       </MainContentHeader>
       <div>
-        <p role="paragraph">{tweets.tweet}</p>
+        <p role="paragraph">{tweet.tweet}</p>
       </div>
       <MainContentButtonsContainer>
         <MainContentButtons type="button" aria-label="comment-button">
@@ -83,10 +88,10 @@ function MainContent({ tweets, USER_TOKEN }: MainContentPropsShape) {
           aria-label="like-button"
         >
           <ButtonContentContainer>
-            { true
+            { likedTweets.some(({ id }) => tweet.id === id)
               ? <AiFillHeart color="rgb(249, 24, 128)" />
               : <AiOutlineHeart /> }
-            <TweetStatusCounter>{tweets.likes}</TweetStatusCounter>
+            <TweetStatusCounter>{tweet.likes}</TweetStatusCounter>
 
           </ButtonContentContainer>
         </MainContentButtons>

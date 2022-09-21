@@ -3,7 +3,7 @@ import Api from './Api';
 const createTweet = async (tweet: string, userToken: string, userId: number) => {
   try {
     const response = await Api.post(`/tweet/create/${userId}`, { tweet }, {
-      headers: { Authorization: userToken },
+      headers: { Authorization: userToken, 'Content-Type': 'application/json' },
     });
     return response.data;
   } catch (e: any) {
@@ -22,9 +22,11 @@ const deleteTweet = async (tweetId: number, userToken: string, userId: number) =
   }
 };
 
-const getAllTweets = async () => {
+const getAllTweets = async (userToken: string) => {
   try {
-    const response = await Api.get('/tweet/');
+    const response = await Api.get('/tweet/', {
+      headers: { Authorization: userToken },
+    });
     return response.data;
   } catch (e: any) {
     return { message: e.message };
@@ -33,7 +35,7 @@ const getAllTweets = async () => {
 
 const likeTweet = async (userId: number, tweetId: number, userToken: string) => {
   try {
-    const response = await Api.post(`/tweet/like/${userId}/${tweetId}`, {
+    const response = await Api.post(`/tweet/like/${userId}/${tweetId}`, {}, {
       headers: { Authorization: userToken },
     });
     return response.data;
@@ -44,7 +46,7 @@ const likeTweet = async (userId: number, tweetId: number, userToken: string) => 
 
 const getAllLikedTweets = async (userId: number, userToken: string) => {
   try {
-    const response = await Api.post(`/tweet/liked/${userId}`, {
+    const response = await Api.get(`/tweet/liked/${userId}`, {
       headers: { Authorization: userToken },
     });
     return response.data;

@@ -9,10 +9,13 @@ import {
 import Footer from '../components/Home/Footer';
 import Header from '../components/Home/Header';
 import MainContent from '../components/Home/MainContent';
-import { getAllTweets } from '../services/tweetApi';
+import { getAllLikedTweets, getAllTweets } from '../services/tweetApi';
 import { GlobalPageContainer } from '../styles/globalContainer';
 import myAccount from '../services/myAccountMock/myAccount';
 import TweetCard from '../components/Tweet/TweetCard';
+import getAuthUser from '../services/auth';
+import MyProfilePicture from '../public/myPicture.png';
+import { UserDataShape } from './userProfile';
 
 export type TweetsShape = {
   tweet: string;
@@ -27,10 +30,11 @@ export type TweetsShape = {
 
 export interface MainPropsShape {
   data: TweetsShape[];
-  USER_TOKEN: string;
+  userData: UserDataShape;
+  likedTweets: TweetsShape[];
 }
 
-function Main({ data, USER_TOKEN }: MainPropsShape) {
+function Main({ data, userData, likedTweets }: MainPropsShape) {
   const [visible, setVisible] = useState(7);
   const showMoreTweets = () => {
     setVisible(data.length);
@@ -41,21 +45,24 @@ function Main({ data, USER_TOKEN }: MainPropsShape) {
       <Header title="Página Inicial" />
       <HeaderSpacing />
       <MainContentHomeContainer>
-        <TweetCard USER_TOKEN={USER_TOKEN} />
+        <TweetCard userData={userData} />
         {myAccount.map((tweet) => (
           <MainContent
-            USER_TOKEN={USER_TOKEN}
-            tweets={tweet}
+            userData={userData}
+            likedTweets={likedTweets}
+            tweet={tweet}
+            key={tweet.tweet}
+            profilePicture={MyProfilePicture.src}
           />
         ))}
         {data
-          .reverse()
           .slice(0, visible)
           .map((tweet) => (
             <MainContent
-              USER_TOKEN={USER_TOKEN}
+              userData={userData}
+              likedTweets={likedTweets}
               key={tweet.id}
-              tweets={tweet}
+              tweet={tweet}
             />
           ))}
       </MainContentHomeContainer>
@@ -72,12 +79,16 @@ function Main({ data, USER_TOKEN }: MainPropsShape) {
 
 export async function getServerSideProps(context) {
   const cookies: any = parseCookies(context);
-  const tweets: TweetsShape[] = await getAllTweets();
+  const tweets: TweetsShape[] = await getAllTweets(cookies.userToken);
+  const userData = getAuthUser(cookies.userToken);
+
+  const likedTweets = await getAllLikedTweets(userData.id, cookies.userToken);
 
   return {
     props: {
       data: tweets,
-      USER_TOKEN: cookies.userToken,
+      userData: { USER_TOKEN: cookies.userToken, userId: userData.id, userName: userData.name },
+      likedTweets,
     },
   };
 }

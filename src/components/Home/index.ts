@@ -70,10 +70,7 @@ export const UserProfilePicture = styled.img<UserProfilePictureProps>`
     ${({ tweetProfilePicture }) => tweetProfilePicture && css`
         width: 2.9em
     `}
-
-    &&:hover {
-        cursor: pointer;
-    }
+    cursor: pointer;
 `;
 
 export const FooterContainer = styled.footer`

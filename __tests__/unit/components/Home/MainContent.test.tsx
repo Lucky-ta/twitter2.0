@@ -15,13 +15,19 @@ describe('Test MainContent component', () => {
     },
   };
 
+  const userDataMock = {
+    USER_TOKEN: '00000-0000',
+    userId: 1,
+    userName: 'Lucas',
+  };
+
   beforeEach(() => {
     const useRouter = jest.spyOn(require('next/router'), 'useRouter');
     useRouter.mockImplementationOnce(() => ({
       pathname: '/userProfile',
     }));
 
-    render(<MainContent tweets={tweetMock} USER_TOKEN="0000-0000" />);
+    render(<MainContent tweet={tweetMock} userData={userDataMock} />);
   });
 
   it('Main content must have profile picture', () => {

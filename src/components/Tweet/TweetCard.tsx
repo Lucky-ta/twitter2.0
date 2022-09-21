@@ -26,16 +26,16 @@ import {
 } from '../../utils/redirectFunctions';
 
 interface TweetCardPropsShape {
-  USER_TOKEN: string;
+  userData: {USER_TOKEN: string, userId: number, userName: string};
 }
 
-function TweetCard({ USER_TOKEN }: TweetCardPropsShape) {
+function TweetCard({ userData }: TweetCardPropsShape) {
   const [tweet, setTweet] = useState('');
 
   const router = useRouter();
 
   const postNewTweet = async () => {
-    const response = await createTweet(tweet, USER_TOKEN);
+    const response = await createTweet(tweet, userData.USER_TOKEN, userData.userId);
     if (response.id) {
       return redirectToHomePage(router);
     }

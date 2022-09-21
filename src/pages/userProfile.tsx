@@ -5,7 +5,7 @@ import { parseCookies } from 'nookies';
 import MainContent from '../components/Home/MainContent';
 import Footer from '../components/Home/Footer';
 import ProfileHeader from '../components/Profile/ProfileHeader';
-import { getAllTweets } from '../services/tweetApi';
+import { getAllLikedTweets, getAllTweets } from '../services/tweetApi';
 import { TweetsShape } from './home';
 import { FooterSpacing, HeaderSpacing } from '../components/Home';
 import ProfileInfo from '../components/Profile/ProfileInfo';
@@ -20,26 +20,24 @@ import {
 } from '../components/Profile';
 import getAuthUser from '../services/auth';
 
-export type LikedTweetsShape = {
-  id: number;
+export type UserDataShape = {
+  USER_TOKEN: string;
   userId: number;
-  tweetId: number;
-  Tweet: { tweet: string };
-};
+  userName: string;
+}
 
 interface UserProfilePropsShape {
   data: TweetsShape[];
-  USER_TOKEN: string;
-  likedTweets: LikedTweetsShape;
+  userData: UserDataShape;
+  likedTweets: any;
 }
 
-function UserProfile({ data, USER_TOKEN, likedTweets }: UserProfilePropsShape) {
+function UserProfile({ data, userData, likedTweets }: UserProfilePropsShape) {
   const [tweetsCategory, setTweetsCategory] = useState('tweets');
   const [userTweets, setUserTweets] = useState([]);
-  const [userData, setUserData] = useState<any>({});
 
   const renderMainContent = (mainContent: TweetsShape[]) => mainContent.map((tweet) => (
-    <MainContent USER_TOKEN={USER_TOKEN} tweets={tweet} />
+    <MainContent userData={userData} tweet={tweet} likedTweets={likedTweets} />
   ));
 
   const renderTweetsByCategory = () => {
@@ -58,20 +56,9 @@ function UserProfile({ data, USER_TOKEN, likedTweets }: UserProfilePropsShape) {
   };
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const authUser = getAuthUser(USER_TOKEN);
-      setUserData(authUser);
-    }
-  }, []);
-
-  useEffect(() => {
-    const filteredUser = data.filter((tweet) => tweet.User.id === userData.id);
+    const filteredUser = data.filter((tweet) => tweet.User.id === userData.userId);
     setUserTweets(filteredUser);
   }, [userData]);
-
-  useEffect(() => {
-
-  }, []);
 
   const redirectContact = (contactLink: string) => {
     window.location.href = contactLink;
@@ -82,7 +69,7 @@ function UserProfile({ data, USER_TOKEN, likedTweets }: UserProfilePropsShape) {
       <ProfileHeader title="Perfil" />
       <HeaderSpacing />
       <ProfileInfo />
-      <ProfileUserName>{userData.name}</ProfileUserName>
+      <ProfileUserName>{userData.userName}</ProfileUserName>
       <ProfileContactContainer>
         <ContactButton
           id="https://www.linkedin.com/in/lucasmaieski/"
@@ -153,14 +140,15 @@ export default UserProfile;
 export async function getServerSideProps(context) {
   const cookies: any = parseCookies(context);
 
-  const tweets: TweetsShape[] = await getAllTweets();
+  const tweets: TweetsShape[] = await getAllTweets(cookies.userToken);
   const userData = getAuthUser(cookies.userToken);
 
+  const likedTweets = await getAllLikedTweets(userData.id, cookies.userToken);
 
   return {
     props: {
       data: tweets,
-      USER_TOKEN: cookies.userToken,
+      userData: { USER_TOKEN: cookies.userToken, userId: userData.id, userName: userData.name },
       likedTweets,
     },
   };
