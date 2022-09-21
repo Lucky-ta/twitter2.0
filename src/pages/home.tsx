@@ -80,8 +80,8 @@ function Main({ data, userData, likedTweets }: MainPropsShape) {
 export async function getServerSideProps(context) {
   const cookies: any = parseCookies(context);
   const tweets: TweetsShape[] = await getAllTweets(cookies.userToken);
-  const userData = getAuthUser(cookies.userToken);
 
+  const userData = getAuthUser(cookies.userToken);
   const likedTweets = await getAllLikedTweets(userData.id, cookies.userToken);
 
   return {
