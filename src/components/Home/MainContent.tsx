@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 import { FiShare } from 'react-icons/fi';
 import { BsThreeDots } from 'react-icons/bs';
@@ -32,6 +32,7 @@ export interface MainContentPropsShape {
 function MainContent({
   tweet, userData, likedTweets, profilePicture,
 }: MainContentPropsShape) {
+  const [isLiked, setIsLiked] = useState(false);
   const router = useRouter();
 
   const [isMenuVisible, setisMenuVisible] = useState(false);
@@ -47,7 +48,17 @@ function MainContent({
 
   const handleLikeTweet = async () => {
     await likeTweet(userData.userId, tweet.id, userData.USER_TOKEN);
+    setIsLiked(!isLiked);
   };
+
+  const isTweetLiked = () => {
+    const result: boolean = likedTweets.some(({ id }) => tweet.id === id);
+    setIsLiked(result);
+  };
+
+  useEffect(() => {
+    isTweetLiked();
+  }, []);
 
   return (
     <MainContentContainer>
@@ -88,7 +99,7 @@ function MainContent({
           aria-label="like-button"
         >
           <ButtonContentContainer>
-            { likedTweets.some(({ id }) => tweet.id === id)
+            { isLiked
               ? <AiFillHeart color="rgb(249, 24, 128)" />
               : <AiOutlineHeart /> }
             <TweetStatusCounter>{tweet.likes}</TweetStatusCounter>
