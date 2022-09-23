@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AiFillGithub, AiOutlineLinkedin } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
 import { parseCookies } from 'nookies';
+import { useRouter } from 'next/router';
 import MainContent from '../components/Home/MainContent';
 import Footer from '../components/Home/Footer';
 import ProfileHeader from '../components/Profile/ProfileHeader';
@@ -19,12 +20,13 @@ import {
   ProfileUserName,
 } from '../components/Profile';
 import getAuthUser from '../services/auth';
+import { redirectToEditProfilePage } from '../utils/redirectFunctions';
 
 export type UserDataShape = {
   USER_TOKEN: string;
   userId: number;
   userName: string;
-}
+};
 
 interface UserProfilePropsShape {
   data: TweetsShape[];
@@ -33,11 +35,16 @@ interface UserProfilePropsShape {
 }
 
 function UserProfile({ data, userData, likedTweets }: UserProfilePropsShape) {
+  const router = useRouter();
   const [tweetsCategory, setTweetsCategory] = useState('tweets');
   const [userTweets, setUserTweets] = useState([]);
 
   const renderMainContent = (mainContent: TweetsShape[]) => mainContent.map((tweet) => (
-    <MainContent userData={userData} tweet={tweet} likedTweets={likedTweets} />
+    <MainContent
+      userData={userData}
+      tweet={tweet}
+      likedTweets={likedTweets}
+    />
   ));
 
   const renderTweetsByCategory = () => {
@@ -56,7 +63,9 @@ function UserProfile({ data, userData, likedTweets }: UserProfilePropsShape) {
   };
 
   useEffect(() => {
-    const filteredUser = data.filter((tweet) => tweet.User.id === userData.userId);
+    const filteredUser = data.filter(
+      (tweet) => tweet.User.id === userData.userId,
+    );
     setUserTweets(filteredUser);
   }, [userData]);
 
@@ -128,7 +137,12 @@ function UserProfile({ data, userData, likedTweets }: UserProfilePropsShape) {
         </ProfileCategoriesOptions>
       </ProfileCategories>
       {renderTweetsByCategory()}
-      <EditProfileButton type="button">Editar perfil</EditProfileButton>
+      <EditProfileButton
+        onClick={() => redirectToEditProfilePage(router)}
+        type="button"
+      >
+        Editar perfil
+      </EditProfileButton>
       <Footer />
       <FooterSpacing />
     </ProfileContainer>
@@ -148,7 +162,11 @@ export async function getServerSideProps(context) {
   return {
     props: {
       data: tweets,
-      userData: { USER_TOKEN: cookies.userToken, userId: userData.id, userName: userData.name },
+      userData: {
+        USER_TOKEN: cookies.userToken,
+        userId: userData.id,
+        userName: userData.name,
+      },
       likedTweets,
     },
   };
