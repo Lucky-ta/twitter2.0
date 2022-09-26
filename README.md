@@ -99,6 +99,7 @@ Certifique-se de que não há nenhuma mais nenhuma aplicação rodando na porta 
 - http://localhost:3000/error - Página de erro;
 - http://localhost:3000/compose/tweet - Página de criação de tweet;
 ---
+```
 
 ## 🛠️ Construído com
 
