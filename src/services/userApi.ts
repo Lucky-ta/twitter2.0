@@ -40,11 +40,20 @@ const deleteUser = async (userId: number, userToken: string) => {
   }
 };
 
-const editUserName = async (userId: number, userToken: string, name: string) => {
+const editUserName = async (userId: number, userToken: string, userName: string) => {
   try {
-    const result = await Api.put(`/user/edit/${userId}`, name, {
+    const result = await Api.put(`/user/edit/${userId}`, { name: userName }, {
       headers: { Authorization: userToken },
     });
+    return result.data;
+  } catch (e: any) {
+    return { message: e.message };
+  }
+};
+
+const getUserById = async (userId: number) => {
+  try {
+    const result = await Api.get(`/user/${userId}`);
     return result.data;
   } catch (e: any) {
     return { message: e.message };
@@ -56,4 +65,5 @@ export {
   signInUser,
   deleteUser,
   editUserName,
+  getUserById,
 };

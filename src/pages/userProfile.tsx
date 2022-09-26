@@ -21,6 +21,7 @@ import {
 } from '../components/Profile';
 import getAuthUser from '../services/auth';
 import { redirectToEditProfilePage } from '../utils/redirectFunctions';
+import { getUserById } from '../services/userApi';
 
 export type UserDataShape = {
   USER_TOKEN: string;
@@ -156,6 +157,7 @@ export async function getServerSideProps(context) {
 
   const tweets: TweetsShape[] = await getAllTweets(cookies.userToken);
   const userData = getAuthUser(cookies.userToken);
+  const currentUserData = await getUserById(userData.id);
 
   const likedTweets = await getAllLikedTweets(userData.id, cookies.userToken);
 
@@ -165,7 +167,7 @@ export async function getServerSideProps(context) {
       userData: {
         USER_TOKEN: cookies.userToken,
         userId: userData.id,
-        userName: userData.name,
+        userName: currentUserData.name,
       },
       likedTweets,
     },

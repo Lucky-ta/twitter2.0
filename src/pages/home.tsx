@@ -16,6 +16,7 @@ import TweetCard from '../components/Tweet/TweetCard';
 import getAuthUser from '../services/auth';
 import MyProfilePicture from '../public/myPicture.png';
 import { UserDataShape } from './userProfile';
+import { getUserById } from '../services/userApi';
 
 export type TweetsShape = {
   tweet: string;
@@ -82,12 +83,18 @@ export async function getServerSideProps(context) {
   const tweets: TweetsShape[] = await getAllTweets(cookies.userToken);
 
   const userData = getAuthUser(cookies.userToken);
+  const currentUserData = await getUserById(userData.id);
+
   const likedTweets = await getAllLikedTweets(userData.id, cookies.userToken);
 
   return {
     props: {
       data: tweets,
-      userData: { USER_TOKEN: cookies.userToken, userId: userData.id, userName: userData.name },
+      userData: {
+        USER_TOKEN: cookies.userToken,
+        userId: userData.id,
+        userName: currentUserData.name,
+      },
       likedTweets,
     },
   };

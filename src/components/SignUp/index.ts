@@ -30,8 +30,7 @@ export const SignUpComponentForm = styled.form`
     flex-direction: column;
 
     gap: 1em;
-    margin-top: 2em;
-    margin-bottom: 2em;
+    margin: 2em;
 
     input:-webkit-autofill,
     input:-webkit-autofill:focus {

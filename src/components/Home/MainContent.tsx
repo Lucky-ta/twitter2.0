@@ -32,7 +32,7 @@ export interface MainContentPropsShape {
 function MainContent({
   tweet, userData, likedTweets, profilePicture,
 }: MainContentPropsShape) {
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState<any>(false);
   const router = useRouter();
 
   const [isMenuVisible, setisMenuVisible] = useState(false);
