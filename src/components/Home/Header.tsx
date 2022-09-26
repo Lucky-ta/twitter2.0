@@ -9,7 +9,7 @@ import {
   MainPageHeader,
   UserProfilePicture,
 } from '.';
-import { redirectToProfilePage } from '../../utils/redirectFunctions';
+import Routes from '../../utils/redirectFunctions';
 
 interface IHeaderProps {
   title: string;
@@ -17,10 +17,14 @@ interface IHeaderProps {
 
 function Header({ title }: IHeaderProps) {
   const router = useRouter();
+  const redirect = new Routes(router);
 
   return (
     <MainPageHeader>
-      <UserProfilePicture onClick={() => redirectToProfilePage(router)} src={ProfilePicture.src} />
+      <UserProfilePicture
+        onClick={() => redirect.redirectToProfilePage()}
+        src={ProfilePicture.src}
+      />
       <HeaderTitle>{title}</HeaderTitle>
       <HeaderFilterButton type="button">
         <BsStars />

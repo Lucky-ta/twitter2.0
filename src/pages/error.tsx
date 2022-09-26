@@ -2,10 +2,11 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { ErrorPageParagraph, ErrorPageSpan, ErrorPageWarning } from '../components/Error';
 import { TweetCardPageContainer } from '../components/Tweet';
-import { redirectToSignInPage } from '../utils/redirectFunctions';
+import Routes from '../utils/redirectFunctions';
 
 function ErrorPage() {
   const router = useRouter();
+  const redirect = new Routes(router);
 
   return (
     <TweetCardPageContainer>
@@ -17,7 +18,7 @@ function ErrorPage() {
         Faça o login novamente clicando no link abaixo.
       </ErrorPageParagraph>
 
-      <ErrorPageSpan onClick={() => redirectToSignInPage(router)}>Login</ErrorPageSpan>
+      <ErrorPageSpan onClick={() => redirect.redirectToSignInPage()}>Login</ErrorPageSpan>
     </TweetCardPageContainer>
   );
 }

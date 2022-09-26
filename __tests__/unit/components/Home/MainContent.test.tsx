@@ -27,7 +27,7 @@ describe('Test MainContent component', () => {
       pathname: '/userProfile',
     }));
 
-    render(<MainContent tweet={tweetMock} userData={userDataMock} />);
+    render(<MainContent likedTweets={[]} tweet={tweetMock} userData={userDataMock} />);
   });
 
   it('Main content must have profile picture', () => {

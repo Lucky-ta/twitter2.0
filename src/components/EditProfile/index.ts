@@ -27,7 +27,7 @@ export const DeleteButton = styled.button`
     padding-left: 1em;
     padding-right: 1em;
 
-    position: absolute;
+    position: fixed;
     bottom: 2em;
     right: 2em;
 

@@ -10,10 +10,11 @@ import {
   SignUpComponentTitle,
 } from '.';
 import { NewUserShape, signUpUser } from '../../services/userApi';
-import { redirectToSignInPage } from '../../utils/redirectFunctions';
+import Routes from '../../utils/redirectFunctions';
 
 function SignUpForm() {
   const router = useRouter();
+  const redirect = new Routes(router);
   const [errorMessage, setErrorMessage] = useState('');
 
   const [newUser, setNewUser] = useState<NewUserShape>({
@@ -32,7 +33,7 @@ function SignUpForm() {
     setErrorMessage('');
     const response = await signUpUser(formData);
     if (response.id) {
-      redirectToSignInPage(router);
+      redirect.redirectToSignInPage();
     }
     setErrorMessage('E-mail já cadastrado.');
   };
@@ -99,7 +100,7 @@ function SignUpForm() {
         <p>Já tem uma conta?</p>
         <SignUpComponentLink
           type="button"
-          onClick={() => redirectToSignInPage(router)}
+          onClick={() => redirect.redirectToSignInPage()}
         >
           Entrar
         </SignUpComponentLink>

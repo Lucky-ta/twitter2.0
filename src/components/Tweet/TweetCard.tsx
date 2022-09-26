@@ -20,10 +20,7 @@ import {
   TweetVisiblityOptionContainer,
 } from '.';
 import { createTweet } from '../../services/tweetApi';
-import {
-  redirectToHomePage,
-  redirectToProfilePage,
-} from '../../utils/redirectFunctions';
+import Routes from '../../utils/redirectFunctions';
 
 interface TweetCardPropsShape {
   userData: { USER_TOKEN: string; userId: number; userName: string };
@@ -33,6 +30,7 @@ function TweetCard({ userData }: TweetCardPropsShape) {
   const [tweet, setTweet] = useState('');
 
   const router = useRouter();
+  const redirect = new Routes(router);
 
   const postNewTweet = async () => {
     const response = await createTweet(
@@ -42,7 +40,7 @@ function TweetCard({ userData }: TweetCardPropsShape) {
     );
     if (response.id) {
       setTweet('');
-      return redirectToHomePage(router);
+      return redirect.redirectToHomePage();
     }
     return window.alert('Tweet inválido');
   };
@@ -51,13 +49,13 @@ function TweetCard({ userData }: TweetCardPropsShape) {
     <TweetPageContainer>
       <LeftArrowButton
         aria-label="previous-page-button"
-        onClick={() => redirectToHomePage(router)}
+        onClick={() => redirect.redirectToHomePage()}
       >
         <BsArrowLeftShort />
       </LeftArrowButton>
       <TweetContainer>
         <UserProfilePicture
-          onClick={() => redirectToProfilePage(router)}
+          onClick={() => redirect.redirectToProfilePage()}
           alt="main_profile_picture"
           tweetProfilePicture
           src={ProfilePicture.src}

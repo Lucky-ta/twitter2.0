@@ -1,13 +1,37 @@
-export const redirectToSignInPage = (route: any) => route.push('/');
+class Routes {
+  router: any;
 
-export const redirectToSignUpPage = (route: any) => route.push('/signUp');
+  constructor(router: any) {
+    this.router = router;
+  }
 
-export const redirectToHomePage = (route: any) => route.push('/home');
+  redirectToSignInPage() {
+    return this.router.push('/');
+  }
 
-export const redirectToProfilePage = (route: any) => route.push('/userProfile');
+  redirectToSignUpPage() {
+    return this.router.push('/signUp');
+  }
 
-export const redirectToTweetPage = (route: any) => route.push('/compose/tweet');
+  redirectToHomePage() {
+    return this.router.push('/home');
+  }
 
-export const redirectToErrorPage = (route: any) => route.push('/error');
+  redirectToProfilePage() {
+    return this.router.push('/userProfile');
+  }
 
-export const redirectToEditProfilePage = (route: any) => route.push('/userProfile/edit');
+  redirectToTweetPage() {
+    return this.router.push('/compose/tweet');
+  }
+
+  redirectToErrorPage() {
+    return this.router.push('/error');
+  }
+
+  redirectToEditProfilePage() {
+    return this.router.push('/userProfile/edit');
+  }
+}
+
+export default Routes;

@@ -18,7 +18,7 @@ import {
 } from '.';
 import { TweetsShape } from '../../pages/home';
 import MenuOptions from '../MenuOptions/MenuOptions';
-import { redirectToProfilePage } from '../../utils/redirectFunctions';
+import Routes from '../../utils/redirectFunctions';
 import { likeTweet } from '../../services/tweetApi';
 import { UserDataShape } from '../../pages/userProfile';
 
@@ -34,6 +34,7 @@ function MainContent({
 }: MainContentPropsShape) {
   const [isLiked, setIsLiked] = useState<any>(false);
   const router = useRouter();
+  const redirect = new Routes(router);
 
   const [isMenuVisible, setisMenuVisible] = useState(false);
   const showMenuOptions = () => {
@@ -64,7 +65,7 @@ function MainContent({
     <MainContentContainer>
       <MainContentHeader>
         <UserProfilePicture
-          onClick={() => redirectToProfilePage(router)}
+          onClick={() => redirect.redirectToProfilePage()}
           alt="main_profile_picture"
           tweetProfilePicture
           src={profilePicture || ProfilePicture.src}

@@ -20,7 +20,7 @@ import {
   ProfileUserName,
 } from '../components/Profile';
 import getAuthUser from '../services/auth';
-import { redirectToEditProfilePage } from '../utils/redirectFunctions';
+import Routes from '../utils/redirectFunctions';
 import { getUserById } from '../services/userApi';
 
 export type UserDataShape = {
@@ -37,6 +37,8 @@ interface UserProfilePropsShape {
 
 function UserProfile({ data, userData, likedTweets }: UserProfilePropsShape) {
   const router = useRouter();
+  const redirect = new Routes(router);
+
   const [tweetsCategory, setTweetsCategory] = useState('tweets');
   const [userTweets, setUserTweets] = useState([]);
 
@@ -139,7 +141,7 @@ function UserProfile({ data, userData, likedTweets }: UserProfilePropsShape) {
       </ProfileCategories>
       {renderTweetsByCategory()}
       <EditProfileButton
-        onClick={() => redirectToEditProfilePage(router)}
+        onClick={() => redirect.redirectToEditProfilePage()}
         type="button"
       >
         Editar perfil

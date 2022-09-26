@@ -3,10 +3,7 @@ import { setCookie } from 'nookies';
 import React, { useState } from 'react';
 import FormButtonsContainer from '.';
 import { signInUser, UserCredentialsShape } from '../../services/userApi';
-import {
-  redirectToHomePage,
-  redirectToSignUpPage,
-} from '../../utils/redirectFunctions';
+import Routes from '../../utils/redirectFunctions';
 import Loading from '../Loading/Loading';
 import {
   SignUpComponentButton,
@@ -20,6 +17,8 @@ import {
 
 function LoginForm() {
   const router = useRouter();
+  const redirect = new Routes(router);
+
   const [isRender, setIsRender] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -45,7 +44,7 @@ function LoginForm() {
       });
 
       setIsRender(true);
-      redirectToHomePage(router);
+      redirect.redirectToHomePage();
     }
   };
 
@@ -86,7 +85,7 @@ function LoginForm() {
         <p>Não tem uma conta?</p>
         <SignUpComponentLink
           type="button"
-          onClick={() => redirectToSignUpPage(router)}
+          onClick={() => redirect.redirectToSignUpPage()}
         >
           Inscreva-se
         </SignUpComponentLink>
