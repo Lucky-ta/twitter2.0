@@ -63,6 +63,7 @@ export const SignUpComponentButton = styled.button<ButtonProps>`
     height: 2.8em;
     border: none;
     border-radius: 4em;
+    color: black;
 
     font-size: 0.9em;
     font-weight: 700;

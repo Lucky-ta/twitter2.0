@@ -9,7 +9,7 @@ import { SignUpComponentForm, SignUpComponentInput } from '../../components/Sign
 import getAuthUser from '../../services/auth';
 import { editUserName, deleteUser, getUserById } from '../../services/userApi';
 import EditProfileBodyContainer from '../../styles';
-import { redirectToSignUpPage } from '../../utils/redirectFunctions';
+import { redirectToEditProfilePage, redirectToSignUpPage } from '../../utils/redirectFunctions';
 import { UserDataShape } from '../userProfile';
 
 type EditProfilePropsShape = {
@@ -26,13 +26,14 @@ function EditProfile({ userData }: EditProfilePropsShape) {
       userData.USER_TOKEN,
       userName,
     );
-    console.log(result);
+    if (result.message) {
+      return window.alert('Não foi possível alterar o nome');
+    } return redirectToEditProfilePage(router);
   };
 
   const handleDeleteAccountButton = async () => {
     const result = await deleteUser(userData.userId, userData.USER_TOKEN);
     if (result.message) {
-      console.log(result);
       return window.alert('Não foi possível excluir');
     } return redirectToSignUpPage(router);
   };
