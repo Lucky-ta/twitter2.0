@@ -26,7 +26,7 @@ import {
 } from '../../utils/redirectFunctions';
 
 interface TweetCardPropsShape {
-  userData: {USER_TOKEN: string, userId: number, userName: string};
+  userData: { USER_TOKEN: string; userId: number; userName: string };
 }
 
 function TweetCard({ userData }: TweetCardPropsShape) {
@@ -35,8 +35,13 @@ function TweetCard({ userData }: TweetCardPropsShape) {
   const router = useRouter();
 
   const postNewTweet = async () => {
-    const response = await createTweet(tweet, userData.USER_TOKEN, userData.userId);
+    const response = await createTweet(
+      tweet,
+      userData.USER_TOKEN,
+      userData.userId,
+    );
     if (response.id) {
+      setTweet('');
       return redirectToHomePage(router);
     }
     return window.alert('Tweet inválido');
@@ -65,6 +70,7 @@ function TweetCard({ userData }: TweetCardPropsShape) {
             cols={30}
             rows={10}
             onChange={({ target }: any) => setTweet(target.value)}
+            value={tweet}
           />
           <TweetVisiblityOptionContainer>
             <FaGlobeAmericas />
